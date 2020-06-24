@@ -1,11 +1,12 @@
 package co.desofsi.souriapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.data.Constant;
@@ -40,12 +42,18 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
     public void onBindViewHolder(@NonNull SpecialtyHolder holder, int position) {
 
         Specialty specialty = list.get(position);
+
        // Picasso.get().load(Constant.URL+"img/users/"+specialty.getDoctor().getUrl_image()).into(holder.image_doctor);
         System.out.println(Constant.URL+specialty.getUrl_image());
-       Picasso.get().load(Constant.URL+specialty.getUrl_image()).into(holder.imageView_specialty);
+       Picasso.get().load(Constant.URL+specialty.getUrl_image()).into(holder.image_specialty);
         //Picasso.get().load("https://i.imgur.com/tGbaZCY.jpg").into(holder.imageView_specialty);
         holder.txt_name_specialty.setText(specialty.getName());
         holder.text_status_specialty.setText(specialty.getDescription());
+
+        holder.cardView.setCardBackgroundColor(Color.parseColor(specialty.getColor()));
+        holder.cardView.setRadius(40);
+
+
     }
 
     @Override
@@ -57,16 +65,18 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
     class SpecialtyHolder extends RecyclerView.ViewHolder{
 
         private TextView txt_name_specialty,text_status_specialty;
-        private CircleImageView image_doctor;
-        private ImageView imageView_specialty;
-        private ImageButton btn_options;
+        private CircleImageView image_specialty;
+        private CardView cardView;
+
+
         public SpecialtyHolder(@NonNull View itemView) {
             super(itemView);
             txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name);
             text_status_specialty= itemView.findViewById(R.id.recycler_specialty_status);
-            image_doctor = itemView.findViewById(R.id.recycler_doctor_image);
-            imageView_specialty = (ImageView) itemView.findViewById(R.id.recycler_specialty_image);
-            btn_options = itemView.findViewById(R.id.recycler_btn_options);
+            image_specialty = itemView.findViewById(R.id.recycler_specialty_image);
+            cardView = itemView.findViewById(R.id.recylcer_card_view);
+
+
         }
     }
 }
