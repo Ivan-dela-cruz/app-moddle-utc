@@ -1,12 +1,14 @@
 package co.desofsi.souriapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -17,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import co.desofsi.souriapp.R;
+import co.desofsi.souriapp.activities.AppointmentActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.models.Specialty;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,9 +43,9 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SpecialtyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SpecialtyHolder holder, final int position) {
 
-        Specialty specialty = list.get(position);
+        final Specialty specialty = list.get(position);
 
        // Picasso.get().load(Constant.URL+"img/users/"+specialty.getDoctor().getUrl_image()).into(holder.image_doctor);
         System.out.println(Constant.URL+specialty.getUrl_image());
@@ -53,7 +57,15 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
         holder.cardView.setCardBackgroundColor(Color.parseColor(specialty.getColor()));
         holder.cardView.setRadius(40);
 
-
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(((HomeActivity)context), AppointmentActivity.class);
+                intent.putExtra("specialty",specialty);
+                intent.putExtra("position",position);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -65,7 +77,7 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
     class SpecialtyHolder extends RecyclerView.ViewHolder{
 
         private TextView txt_name_specialty,text_status_specialty;
-        private CircleImageView image_specialty;
+        private ImageView image_specialty;
         private CardView cardView;
 
 

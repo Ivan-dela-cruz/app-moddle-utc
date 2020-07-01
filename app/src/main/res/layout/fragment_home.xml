@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F3F3"
+    android:background="#FFFFFF"
     android:orientation="vertical">
+
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/home_fragment_toolbar"
@@ -12,109 +13,134 @@
         android:layout_height="wrap_content"
         android:elevation="1dp"
         android:theme="@style/AppTheme.BottomAppbar"
-        android:visibility="gone"
+        android:visibility="visible"
         app:title=" ">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Souri Dental"
-            android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:clickable="true"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo_pantallas" />
+
+            <ImageButton
+                android:scaleType="fitCenter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:clickable="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icons_calendar" />
+        </RelativeLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <ImageButton
-        android:id="@+id/fragmen_home_btn_blue"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-100dp"
-        android:layout_marginEnd="-50dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/circle_grey_fill__rounded_color" />
 
-    <ImageButton
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-140dp"
-        android:layout_marginEnd="-100dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/circle_blue_fill__rounded_color" />
-
-
-    <LinearLayout
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="-150dp"
-        android:layout_below="@+id/fragmen_home_btn_blue"
-        android:id="@+id/fragmet_home_liner_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/fragment_home_card_view"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            app:cardCornerRadius="20dp"
-            android:clickable="true">
-          <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-              <ImageView
-                  android:layout_width="300dp"
-                  android:layout_height="300dp"
-                  android:layout_alignParentEnd="true"
-                  android:layout_marginEnd="-50dp"
-                  android:src="@drawable/medic" />
-
-              <LinearLayout
-                  android:padding="25dp"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
-                  <TextView
-                      android:fontFamily="@font/roboto_bold"
-                      android:textColor="@color/colorBlack"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Limpieza dental de promocion"
-                      android:layout_marginRight="35dp"
-                      android:textSize="20sp"/>
-                  <TextView
-                      android:layout_marginTop="25dp"
-                      android:fontFamily="@font/roboto_regular"
-                      android:textColor="@color/colorBlack"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Nuestra promocion es para las personas que tengan mas de tres tratamientos"
-                      android:textSize="14sp"/>
-
-              </LinearLayout>
-
-          </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/home_fragment_swipe"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fragmet_home_liner_card_view">
+        android:layout_below="@+id/home_fragment_toolbar">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_fragment_recycler"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fragment_home_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="10dp">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/fragment_home_circle_view_user"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/u6" />
+
+                    <TextView
+                        android:id="@+id/fragment_home_text_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:padding="10dp"
+                        android:text="Hola Ivan ¿Estas buscando una cita?"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/texto_especialidades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Especialidades"
+                android:layout_below="@+id/fragment_home_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"/>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/home_fragment_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/texto_especialidades"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_fragment_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <TextView
+                android:id="@+id/text_citas_para_hoy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mis citas para hoy"
+                android:layout_below="@+id/home_fragment_swipe"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"/>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/text_citas_para_hoy"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/colorGrey">
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

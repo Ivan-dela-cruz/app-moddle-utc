@@ -1,24 +1,15 @@
 package co.desofsi.souriapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import co.desofsi.souriapp.content.HomeActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.init.AuthActivity;
 import co.desofsi.souriapp.init.OnBoardActivity;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Html;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 

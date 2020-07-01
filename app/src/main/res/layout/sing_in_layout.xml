@@ -30,7 +30,7 @@
             android:layout_height="148.7dp"
             android:layout_gravity="center"
             android:layout_marginTop="21.7dp"
-            android:src="@drawable/scooter" />
+            android:src="@drawable/souri" />
 
 
         <FrameLayout

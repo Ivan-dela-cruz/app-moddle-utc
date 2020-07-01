@@ -1,13 +1,12 @@
 package co.desofsi.souriapp.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,9 +33,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.adapters.SpecialtyAdapter;
-import co.desofsi.souriapp.content.HomeActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.models.Specialty;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
     private View view;
@@ -45,6 +46,11 @@ public class HomeFragment extends Fragment {
     private SpecialtyAdapter specialtyAdapter;
     private MaterialToolbar toolbar;
     private SharedPreferences sharedPreferences;
+
+    ///atrututos del perfil
+
+    private TextView name_user;
+    private CircleImageView image_user;
 
     public HomeFragment() {
     }
@@ -61,10 +67,22 @@ public class HomeFragment extends Fragment {
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         recyclerView = view.findViewById(R.id.home_fragment_recycler);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        recyclerView.setLayoutManager(horizontalLayoutManagaer);
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
         toolbar = view.findViewById(R.id.home_fragment_toolbar);
         ((HomeActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ///INICIAR ATRIBUTOS DEL PERFIL
+        name_user = view.findViewById(R.id.fragment_home_text_user_name);
+        image_user = view.findViewById(R.id.fragment_home_circle_view_user);
+
+        String name = sharedPreferences.getString("name","");
+        String url_image_user = sharedPreferences.getString("url_image","");
+        name_user.setText("Hola "+name +" ¿Estas buscando una cita?");
+        Picasso.get().load(Constant.URL+url_image_user).into(image_user);
+
 
 
         getSpecialties();

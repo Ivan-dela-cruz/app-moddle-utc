@@ -32,7 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import co.desofsi.souriapp.R;
-import co.desofsi.souriapp.content.HomeActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.init.AuthActivity;
 
@@ -160,6 +160,7 @@ public class SingInFragment extends Fragment {
                                 SharedPreferences.Editor editor = userPref.edit();
 
                                 editor.putString("token", object.getString("token"));
+                                editor.putInt("id", user.getInt("id"));
                                 editor.putString("name", user.getString("name"));
                                 editor.putString("last_name", user.getString("last_name"));
                                 editor.putString("url_image", user.getString("url_image"));

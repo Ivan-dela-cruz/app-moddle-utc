@@ -1,6 +1,8 @@
 package co.desofsi.souriapp.models;
 
-public class Specialty {
+import java.io.Serializable;
+
+public class Specialty implements Serializable {
     private int id;
     private String name,description,url_image,status,created_at,color;
 

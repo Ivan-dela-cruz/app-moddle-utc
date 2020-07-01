@@ -3,7 +3,7 @@ package co.desofsi.souriapp.init;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import co.desofsi.souriapp.R;
-import co.desofsi.souriapp.content.HomeActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -18,7 +18,6 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
