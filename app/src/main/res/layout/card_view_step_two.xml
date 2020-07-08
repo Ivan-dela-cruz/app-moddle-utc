@@ -47,7 +47,7 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:inputType="date"
-                android:maxLines="1"/>
+                android:maxLines="1" />
 
             <TextView
                 android:id="@+id/appointment_tvSelectDoctorAndDate"
@@ -70,7 +70,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/appointment_radioGroupLetf"
@@ -80,22 +81,31 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/appointment_radioGroupTimes"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="8:00 AM"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
+                        android:layout_marginBottom="8dp"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8:30 AM"
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9:00 AM"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
+                            tools:visibility="visible" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9:30 AM"
+                            tools:visibility="visible" />
+                    </RadioGroup>
+
+
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/appointment_radioGroupRight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -107,14 +117,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8:30 AM"
-                        android:visibility="gone"
+
                         tools:visibility="visible" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="9:30 AM"
-                        android:visibility="gone"
                         tools:visibility="visible" />
                 </LinearLayout>
             </LinearLayout>

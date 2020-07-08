@@ -2,6 +2,7 @@ package co.desofsi.souriapp.init;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
@@ -163,7 +164,7 @@ public class UserProfileActivity extends AppCompatActivity {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             byte[] array = byteArrayOutputStream.toByteArray();
-          //  System.out.println("ARCHIVO BASE 64  "+Base64.encodeToString(array, Base64.DEFAULT));
+            //  System.out.println("ARCHIVO BASE 64  "+Base64.encodeToString(array, Base64.DEFAULT));
             return Base64.encodeToString(array, Base64.DEFAULT);
         }
         return "#";
