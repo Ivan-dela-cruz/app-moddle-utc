@@ -2,8 +2,8 @@ package co.desofsi.souriapp.data;
 
 public class Constant {
 
-    //public static  final String URL = "https://www.souridental.com/";
-    public static final String URL = "http://192.168.0.104:8000/";
+    public static  final String URL = "https://www.souridental.com/";
+    //public static final String URL = "http://192.168.0.104:8000/";
     public static final String URL_IMAGE = "http://192.168.0.102";
     public static final String HOME = URL + "api";
     public static final String LOGIN = HOME + "/login";

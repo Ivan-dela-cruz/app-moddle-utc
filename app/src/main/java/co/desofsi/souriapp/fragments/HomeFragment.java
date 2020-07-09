@@ -1,6 +1,7 @@
 package co.desofsi.souriapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,9 +34,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import co.desofsi.souriapp.R;
+import co.desofsi.souriapp.adapters.MyAppointmentAdapter;
 import co.desofsi.souriapp.adapters.SpecialtyAdapter;
 import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
+import co.desofsi.souriapp.init.UserProfileActivity;
 import co.desofsi.souriapp.models.AppointmentDescription;
 import co.desofsi.souriapp.models.Specialty;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -55,6 +58,9 @@ public class HomeFragment extends Fragment {
     private CircleImageView image_user;
     //MY APPOINTMENTS
     private ArrayList<AppointmentDescription> list_appointments_today;
+    private RecyclerView my_appointments_recycler;
+    ///json array
+    JSONArray array, array_my_appointments;
 
     public HomeFragment() {
     }
@@ -81,12 +87,16 @@ public class HomeFragment extends Fragment {
         ///INICIAR ATRIBUTOS DEL PERFIL
         name_user = view.findViewById(R.id.fragment_home_text_user_name);
         image_user = view.findViewById(R.id.fragment_home_circle_view_user);
+        ///RECYCLER MY_APPOINTMEST INIT
+        my_appointments_recycler = view.findViewById(R.id.home_fragment_recycler_my_appointments);
+        my_appointments_recycler.setHasFixedSize(true);
+        LinearLayoutManager LayoutManagaer_my_appointments = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        my_appointments_recycler.setLayoutManager(LayoutManagaer_my_appointments);
 
         String name = sharedPreferences.getString("name", "");
         String url_image_user = sharedPreferences.getString("url_image", "");
         name_user.setText("Hola " + name + " ¿Estas buscando una cita?");
         Picasso.get().load(Constant.URL + url_image_user).into(image_user);
-
 
         getSpecialties();
         getMyAPointments();
@@ -95,6 +105,14 @@ public class HomeFragment extends Fragment {
             public void onRefresh() {
                 getSpecialties();
                 getMyAPointments();
+
+            }
+        });
+        image_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -110,7 +128,7 @@ public class HomeFragment extends Fragment {
                         try {
                             JSONObject object = new JSONObject(response);
                             if (object.getBoolean("success")) {
-                                JSONArray array = new JSONArray(object.getString("specialties"));
+                                array = new JSONArray(object.getString("specialties"));
 
                                 for (int i = 0; i < array.length(); i++) {
                                     JSONObject specialty_object = array.getJSONObject(i);
@@ -131,11 +149,13 @@ public class HomeFragment extends Fragment {
                                 recyclerView.setAdapter(specialtyAdapter);
 
                             }
+
                         } catch (Exception e) {
 
                             e.printStackTrace();
                         }
                         refreshLayout.setRefreshing(false);
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -157,12 +177,12 @@ public class HomeFragment extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
+
     }
 
     private void getMyAPointments() {
         list_appointments_today = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.MY_APPOINTMENTS,
                 new Response.Listener<String>() {
                     @Override
@@ -170,10 +190,10 @@ public class HomeFragment extends Fragment {
                         try {
                             JSONObject object = new JSONObject(response);
                             if (object.getBoolean("success")) {
-                                JSONArray array = new JSONArray(object.getString("appointments"));
+                                array_my_appointments = new JSONArray(object.getString("appointments"));
 
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject specialty_object = array.getJSONObject(i);
+                                for (int i = 0; i < array_my_appointments.length(); i++) {
+                                    JSONObject specialty_object = array_my_appointments.getJSONObject(i);
                                     AppointmentDescription appointmentDescription = new AppointmentDescription();
                                     appointmentDescription.setId(specialty_object.getInt("id"));
                                     appointmentDescription.setColor(specialty_object.getString("color"));
@@ -182,6 +202,7 @@ public class HomeFragment extends Fragment {
                                     appointmentDescription.setStart(specialty_object.getString("start"));
                                     appointmentDescription.setStatus(specialty_object.getString("status"));
                                     appointmentDescription.setEnd(specialty_object.getString("end"));
+                                    appointmentDescription.setReason(specialty_object.getString("reason"));
 
                                     appointmentDescription.setStatus(specialty_object.getString("status"));
                                     appointmentDescription.setSpecialty(specialty_object.getString("specialty"));
@@ -190,13 +211,15 @@ public class HomeFragment extends Fragment {
                                     appointmentDescription.setCi(specialty_object.getString("ci"));
                                     appointmentDescription.setName_d(specialty_object.getString("name_d"));
                                     appointmentDescription.setLast_name_d(specialty_object.getString("last_name_d"));
+                                    appointmentDescription.setUrl_image_d(specialty_object.getString("url_image"));
 
-                                    System.out.println("objeto   : =>      " + appointmentDescription.getColor() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
+                                  //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
                                     list_appointments_today.add(appointmentDescription);
 
                                 }
-                                // specialtyAdapter = new SpecialtyAdapter(getContext(), lis_specialties);
-                                // recyclerView.setAdapter(specialtyAdapter);
+                                MyAppointmentAdapter myAppointmentAdapter = new MyAppointmentAdapter(getContext(), list_appointments_today);
+                                my_appointments_recycler.setAdapter(myAppointmentAdapter);
+
 
                             }
                         } catch (Exception e) {
@@ -204,14 +227,15 @@ public class HomeFragment extends Fragment {
                             e.printStackTrace();
                         }
                         refreshLayout.setRefreshing(false);
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        refreshLayout.setRefreshing(false);
-                        System.out.println(error);
 
+                        System.out.println(error);
+                        refreshLayout.setRefreshing(false);
                     }
                 }) {
             @Override
@@ -225,6 +249,7 @@ public class HomeFragment extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
+
     }
 
 

@@ -31,6 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -77,6 +78,13 @@ public class UserProfileActivity extends AppCompatActivity {
         dialog = new ProgressDialog(UserProfileActivity.this);
         dialog.setCancelable(false);
 
+        String name = userPref.getString("name", "");
+        String last_name = userPref.getString("last_name", "");
+        String url_image = userPref.getString("url_image", "");
+        txt_name.setText(name);
+        txt_last_name.setText(last_name);
+        Picasso.get().load(Constant.URL + url_image).into(image);
+
         txt_selected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +123,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
                                 SharedPreferences.Editor editor = userPref.edit();
                                 editor.putString("url_image", object.getString("url_image"));
+                                editor.putString("name", object.getString("name"));
+                                editor.putString("last_name", object.getString("last_name"));
                                 editor.apply();
                                 startActivity(new Intent(UserProfileActivity.this, HomeActivity.class));
                                 finish();

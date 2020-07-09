@@ -15,20 +15,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.activities.AppointmentActivity;
 import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
+import co.desofsi.souriapp.models.AppointmentDescription;
 import co.desofsi.souriapp.models.Specialty;
 
-public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdapter.SpecialtyHolder>  {
+public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdapter.SpecialtyHolder> {
 
     private Context context;
-    private ArrayList<Specialty> list;
+    private ArrayList<AppointmentDescription> list;
 
-    public MyAppointmentAdapter(Context context, ArrayList<Specialty> list) {
+    public MyAppointmentAdapter(Context context, ArrayList<AppointmentDescription> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,26 +41,42 @@ public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdap
     @NonNull
     @Override
     public SpecialtyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment__recycler_specialty,parent,false);
-       return new SpecialtyHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment__recycler_my_appointments, parent, false);
+        return new SpecialtyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SpecialtyHolder holder, final int position) {
 
-        final Specialty specialty = list.get(position);
+        final AppointmentDescription appointmentDescription = list.get(position);
+        String pattern = "yyyy-MM-dd";
+        String data_appointment = appointmentDescription.getDate().substring(0, 10);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        try {
+            Date date = simpleDateFormat.parse(data_appointment);
+            SimpleDateFormat format = new SimpleDateFormat("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+            String date_for_human = format.format(date);
+            int hour = Integer.parseInt(appointmentDescription.getStart().substring(11, 13));
+            String pref = " AM";
+            if (hour > 12) {
+                pref = " PM";
+            }
 
-       // Picasso.get().load(Constant.URL+"img/users/"+specialty.getDoctor().getUrl_image()).into(holder.image_doctor);
-        System.out.println(Constant.URL+specialty.getUrl_image());
-       Picasso.get().load(Constant.URL+specialty.getUrl_image()).into(holder.image_specialty);
-        //Picasso.get().load("https://i.imgur.com/tGbaZCY.jpg").into(holder.imageView_specialty);
-        holder.txt_name_specialty.setText(specialty.getName());
-        holder.text_status_specialty.setText(specialty.getDescription());
+            holder.txt_name_specialty.setText(appointmentDescription.getSpecialty());
+            holder.txt_name_doctor.setText("Dr. " + appointmentDescription.getName_d()
+                    + " " + appointmentDescription.getLast_name_d());
+            holder.txt_start.setText(date_for_human + " " + appointmentDescription.getStart().substring(11, 16) + pref);
+            holder.txt_reason.setText(appointmentDescription.getReason());
+            Picasso.get().load(Constant.URL + appointmentDescription.getUrl_image_d()).into(holder.image_doctor);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        holder.cardView.setCardBackgroundColor(Color.parseColor(specialty.getColor()));
-        holder.cardView.setRadius(40);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        // holder.cardView.setCardBackgroundColor(Color.parseColor(appointmentDescription.getColor()));
+        // holder.cardView.setRadius(40);
+
+        /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(((HomeActivity)context), AppointmentActivity.class);
@@ -63,7 +84,7 @@ public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdap
                 intent.putExtra("position",position);
                 context.startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override
@@ -72,19 +93,21 @@ public class MyAppointmentAdapter extends RecyclerView.Adapter<MyAppointmentAdap
     }
 
 
-    class SpecialtyHolder extends RecyclerView.ViewHolder{
+    class SpecialtyHolder extends RecyclerView.ViewHolder {
 
-        private TextView txt_name_specialty,text_status_specialty;
-        private ImageView image_specialty;
+        private TextView txt_name_doctor, txt_name_specialty, txt_start, txt_reason;
+        private ImageView image_doctor;
         private CardView cardView;
 
 
         public SpecialtyHolder(@NonNull View itemView) {
             super(itemView);
-            txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name);
-            text_status_specialty= itemView.findViewById(R.id.recycler_specialty_status);
-            image_specialty = itemView.findViewById(R.id.recycler_specialty_image);
-            cardView = itemView.findViewById(R.id.recylcer_card_view);
+            txt_name_doctor = itemView.findViewById(R.id.recycler_doctor_name_my_appointment);
+            txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name_my_appointment);
+            txt_start = itemView.findViewById(R.id.recycler_start__my_appointment);
+            txt_reason = itemView.findViewById(R.id.recycler_reason_my_appointment);
+            image_doctor = itemView.findViewById(R.id.recycler_image_my_appointment);
+            cardView = itemView.findViewById(R.id.recylcer_card_view_my_appointment);
 
 
         }

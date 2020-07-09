@@ -38,8 +38,8 @@ public class HomeActivity extends AppCompatActivity {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
               //  window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-               // window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorWhite));
-                getWindow().setStatusBarColor(Color.TRANSPARENT);
+               window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorWhite));
+                //getWindow().setStatusBarColor(Color.TRANSPARENT);
             }
         } catch (Exception e) {
             e.printStackTrace();

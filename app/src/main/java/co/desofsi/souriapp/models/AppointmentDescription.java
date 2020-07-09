@@ -4,27 +4,18 @@ import java.io.Serializable;
 
 public class AppointmentDescription implements Serializable {
     int id;
-    String color, reason, observation, date, start, end, status, specialty, name_p, last_name_p, ci, name_d, last_name_d;
+    String color, reason, observation, date, start, end, status, specialty, name_p, last_name_p, ci, name_d, last_name_d,url_image_d;
 
     public AppointmentDescription() {
 
     }
 
-    public AppointmentDescription(int id, String color, String reason, String observation, String date, String start, String end, String status, String specialty, String name_p, String last_name_p, String ci, String name_d, String last_name_d) {
-        this.id = id;
-        this.color = color;
-        this.reason = reason;
-        this.observation = observation;
-        this.date = date;
-        this.start = start;
-        this.end = end;
-        this.status = status;
-        this.specialty = specialty;
-        this.name_p = name_p;
-        this.last_name_p = last_name_p;
-        this.ci = ci;
-        this.name_d = name_d;
-        this.last_name_d = last_name_d;
+    public String getUrl_image_d() {
+        return url_image_d;
+    }
+
+    public void setUrl_image_d(String url_image_d) {
+        this.url_image_d = url_image_d;
     }
 
     public int getId() {
