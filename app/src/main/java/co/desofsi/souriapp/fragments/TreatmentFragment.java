@@ -111,8 +111,8 @@ public class TreatmentFragment extends Fragment {
     private void getMyAPointments() {
         list_treatments = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-        String url = Constant.MY_TREATMENTS+"/1";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.MY_TREATMENTS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
