@@ -22,13 +22,14 @@ import java.util.Locale;
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.models.AppointmentDescription;
+import co.desofsi.souriapp.models.Treatment;
 
 public class MyTreatmentAdapter extends RecyclerView.Adapter<MyTreatmentAdapter.SpecialtyHolder> {
 
     private Context context;
-    private ArrayList<AppointmentDescription> list;
+    private ArrayList<Treatment> list;
 
-    public MyTreatmentAdapter(Context context, ArrayList<AppointmentDescription> list) {
+    public MyTreatmentAdapter(Context context, ArrayList<Treatment> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,33 +37,28 @@ public class MyTreatmentAdapter extends RecyclerView.Adapter<MyTreatmentAdapter.
     @NonNull
     @Override
     public SpecialtyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment__recycler_my_appointments, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment__recycler_my_treatments, parent, false);
         return new SpecialtyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SpecialtyHolder holder, final int position) {
 
-        final AppointmentDescription appointmentDescription = list.get(position);
+        final Treatment treatment = list.get(position);
         String pattern = "yyyy-MM-dd";
-        String data_appointment = appointmentDescription.getDate().substring(0, 10);
+        String data_treatment = treatment.getUpdated_at().substring(0, 10);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         try {
-            Date date = simpleDateFormat.parse(data_appointment);
+            Date date = simpleDateFormat.parse(data_treatment);
             SimpleDateFormat format = new SimpleDateFormat("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
             String date_for_human = format.format(date);
-            int hour = Integer.parseInt(appointmentDescription.getStart().substring(11, 13));
-            String pref = " AM";
-            if (hour > 12) {
-                pref = " PM";
-            }
 
-            holder.txt_name_specialty.setText(appointmentDescription.getSpecialty());
-            holder.txt_name_doctor.setText("Dr. " + appointmentDescription.getName_d()
-                    + " " + appointmentDescription.getLast_name_d());
-            holder.txt_start.setText(date_for_human + " " + appointmentDescription.getStart().substring(11, 16) + pref);
-            holder.txt_reason.setText(appointmentDescription.getReason());
-            Picasso.get().load(Constant.URL + appointmentDescription.getUrl_image_d()).into(holder.image_doctor);
+            holder.txt_name_specialty.setText(treatment.getName_s());
+            holder.txt_name_doctor.setText("Dr. " + treatment.getName_d()
+                    + " " + treatment.getLast_name_d());
+            holder.txt_start.setText("$" + treatment.getPrice_total());
+            holder.txt_reason.setText(treatment.getReason());
+            Picasso.get().load(Constant.URL + treatment.getUrl_image()).into(holder.image_doctor);
         } catch (ParseException e) {
             e.printStackTrace();
         }

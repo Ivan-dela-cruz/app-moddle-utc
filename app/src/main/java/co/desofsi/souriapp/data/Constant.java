@@ -14,5 +14,6 @@ public class Constant {
     public static final String TIMES = HOME + "/app-times";
     public static final String REQUEST_APPOINTMENT = HOME + "/app-store-appointment";
     public static final String MY_APPOINTMENTS = HOME + "/app-get-my-appointments";
+    public static final String MY_TREATMENTS = HOME + "/api-get-treatements-patient";
 
 }
