@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F4F4"
+    android:background="@drawable/fondoanimales"
     android:orientation="vertical">
 
 
@@ -14,7 +14,7 @@
         android:elevation="1dp"
         android:theme="@style/AppTheme.BottomAppbar"
         android:visibility="visible"
-        android:background="@color/colorWhite"
+        android:background="@color/colorTurquezaNormal"
         app:title=" ">
 
         <RelativeLayout
@@ -31,9 +31,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
-                android:src="@drawable/logo_pantallas" />
+                android:src="@drawable/logosouriblanco" />
 
             <ImageButton
+                android:visibility="gone"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"

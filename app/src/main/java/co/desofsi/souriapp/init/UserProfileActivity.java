@@ -112,7 +112,7 @@ public class UserProfileActivity extends AppCompatActivity {
         final String password = txt_password.getText().toString().trim();
         final String confir_password = txt_confirm_pass.getText().toString().trim();
 
-        System.out.println(Constant.LOGIN);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SAVE_PROFILE,
                 new Response.Listener<String>() {
                     @Override

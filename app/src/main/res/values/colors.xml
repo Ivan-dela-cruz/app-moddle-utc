@@ -8,4 +8,17 @@
     <color name="colorGrey">#666666</color>
     <color name="colorLightGrey">#999999</color>
     <color name="colorRed">#f44336</color>
+
+
+    <color name="colorTurquezaBajo">#b3d9dd</color>
+    <color name="colorTurquezaMedio">#92d9e1</color>
+    <color name="colorTurquezaOscuro">#10a792</color>
+    <color name="colorTurquezaBlack">#2b9197</color>
+    <color name="colorTurquezaNormal">#57c0c7</color>
+    <color name="colorTurquezaBanco">#ccecf0</color>
+    <color name="colorTurquezaLight">#daeaf9</color>
+    <color name="colorAzulClaro">#b4d7f9</color>
+    <color name="colorAzulMedio">#8ebfee</color>
+    <color name="colorAzulOscuro">#439aee</color>
+
 </resources>

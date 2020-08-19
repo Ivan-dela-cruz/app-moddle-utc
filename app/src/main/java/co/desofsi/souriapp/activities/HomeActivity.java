@@ -36,9 +36,9 @@ public class HomeActivity extends AppCompatActivity {
         try {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+               window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
               //  window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-               window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorWhite));
+               window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorTurquezaNormal));
                 //getWindow().setStatusBarColor(Color.TRANSPARENT);
             }
         } catch (Exception e) {
