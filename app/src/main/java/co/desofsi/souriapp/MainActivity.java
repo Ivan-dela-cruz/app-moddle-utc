@@ -8,8 +8,11 @@ import co.desofsi.souriapp.init.OnBoardActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +20,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+                // window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorTurquezaNormal));
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

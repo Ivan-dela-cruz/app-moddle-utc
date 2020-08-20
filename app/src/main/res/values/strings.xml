@@ -34,7 +34,7 @@
     <string name="btn_next">Siguiente</string>
     <string name="label_doctor">Médico</string>
     <string name="label_scheduled_date">Fecha de la cita</string>
-    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_confirm">Reservar</string>
 
     <string name="date_format">%1$d-%2$s-%3$s</string>
     <string name="item_appointment_id">Cita médica %1$d</string>

@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +28,17 @@ public class OnBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_board);
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+                // window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorTurquezaNormal));
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         init();
     }
 

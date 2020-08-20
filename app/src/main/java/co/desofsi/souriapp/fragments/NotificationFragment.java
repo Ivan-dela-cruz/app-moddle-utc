@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,7 @@ public class NotificationFragment extends Fragment {
     ///json array
     JSONArray array, array_my_appointments;
 
+    private RelativeLayout empty;
     public NotificationFragment() {
     }
 
@@ -76,7 +78,7 @@ public class NotificationFragment extends Fragment {
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-
+        empty = view.findViewById(R.id.vacio);
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
         toolbar = view.findViewById(R.id.home_fragment_toolbar);
         ((HomeActivity) getActivity()).setSupportActionBar(toolbar);
@@ -146,6 +148,13 @@ public class NotificationFragment extends Fragment {
                                     //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
                                     list_payments.add(payment);
 
+                                }
+
+                                if(list_payments.size()==0){
+                                    empty.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    empty.setVisibility(View.GONE);
                                 }
                                 MyPaymentAdapter myPaymentAdapter = new MyPaymentAdapter(getContext(), list_payments);
                                 my_appointments_recycler.setAdapter(myPaymentAdapter);

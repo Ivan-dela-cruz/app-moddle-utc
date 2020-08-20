@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -62,6 +63,8 @@ public class HomeFragment extends Fragment {
     ///json array
     JSONArray array, array_my_appointments;
 
+    private RelativeLayout empty;
+
     public HomeFragment() {
     }
 
@@ -83,6 +86,7 @@ public class HomeFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
         toolbar = view.findViewById(R.id.home_fragment_toolbar);
         ((HomeActivity) getActivity()).setSupportActionBar(toolbar);
+        empty = view.findViewById(R.id.vacio);
 
         ///INICIAR ATRIBUTOS DEL PERFIL
         name_user = view.findViewById(R.id.fragment_home_text_user_name);
@@ -216,6 +220,12 @@ public class HomeFragment extends Fragment {
                                   //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
                                     list_appointments_today.add(appointmentDescription);
 
+                                }
+                                if(list_appointments_today.size()==0){
+                                    empty.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    empty.setVisibility(View.GONE);
                                 }
                                 MyAppointmentAdapter myAppointmentAdapter = new MyAppointmentAdapter(getContext(), list_appointments_today);
                                 my_appointments_recycler.setAdapter(myAppointmentAdapter);

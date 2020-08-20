@@ -2,6 +2,7 @@ package co.desofsi.souriapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.adapters.SpecialtyAdapter;
@@ -17,11 +18,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.Time;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -104,6 +108,17 @@ public class AppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
 
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+                window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorTurquezaNormal));
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         specialty = (Specialty) getIntent().getExtras().getSerializable("specialty");
         position_specialty = (int) getIntent().getExtras().getInt("position");
         init();

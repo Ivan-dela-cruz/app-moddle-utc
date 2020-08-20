@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/bg_gradient"
+    android:background="@drawable/fondoanimales"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
@@ -13,12 +13,14 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:gravity="center_horizontal"
         android:paddingTop="12dp"
         android:text="@string/label_create_appointment"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorLightGrey"
+        android:fontFamily="@font/roboto_black"
+        android:textSize="20sp"/>
 
     <include layout="@layout/card_view_step_one" />
 

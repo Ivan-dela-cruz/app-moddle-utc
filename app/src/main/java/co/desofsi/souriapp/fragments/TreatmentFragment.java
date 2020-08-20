@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,7 @@ public class TreatmentFragment extends Fragment {
     private RecyclerView my_appointments_recycler;
     ///json array
     JSONArray array, array_my_appointments;
+    private RelativeLayout empty;
     public TreatmentFragment() {
     }
 
@@ -77,7 +79,7 @@ public class TreatmentFragment extends Fragment {
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
+        empty = view.findViewById(R.id.vacio);
 
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
         toolbar = view.findViewById(R.id.home_fragment_toolbar);
@@ -148,6 +150,13 @@ public class TreatmentFragment extends Fragment {
                                     //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
                                     list_treatments.add(treatment);
 
+                                }
+
+                                if(list_treatments.size()==0){
+                                    empty.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    empty.setVisibility(View.GONE);
                                 }
                                 MyTreatmentAdapter myAppointmentAdapter = new MyTreatmentAdapter(getContext(), list_treatments);
                                 my_appointments_recycler.setAdapter(myAppointmentAdapter);
