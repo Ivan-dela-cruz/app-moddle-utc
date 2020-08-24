@@ -56,10 +56,10 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_home_black_24dp));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_calendar));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_check_file));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_notifications_black_24dp));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_baseline_payment_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_account_circle_black_24dp));
 
-        bottomNavigation.setCount(ID_NOTIFICATION, "115");
+       // bottomNavigation.setCount(ID_NOTIFICATION, "115");
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
@@ -114,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigation.setCount(ID_NOTIFICATION, "115");
+        //bottomNavigation.setCount(ID_NOTIFICATION, "115");
 
         bottomNavigation.show(ID_HOME,true);
 

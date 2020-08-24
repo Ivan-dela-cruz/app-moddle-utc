@@ -34,7 +34,7 @@
                 android:src="@drawable/logosouriblanco" />
 
             <ImageButton
-                android:visibility="gone"
+                android:id="@+id/home_fragment_btn_exit"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
@@ -44,7 +44,7 @@
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icons_calendar" />
+                android:src="@drawable/ic_baseline_exit_to_app_24" />
         </RelativeLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 

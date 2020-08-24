@@ -1,14 +1,19 @@
 package co.desofsi.souriapp.fragments;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,9 +44,11 @@ import co.desofsi.souriapp.adapters.MyAppointmentAdapter;
 import co.desofsi.souriapp.adapters.SpecialtyAdapter;
 import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
+import co.desofsi.souriapp.init.AuthActivity;
 import co.desofsi.souriapp.init.UserProfileActivity;
 import co.desofsi.souriapp.models.AppointmentDescription;
 import co.desofsi.souriapp.models.Specialty;
+import co.desofsi.souriapp.models.User;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
@@ -57,6 +64,7 @@ public class HomeFragment extends Fragment {
 
     private TextView name_user;
     private CircleImageView image_user;
+    private ImageButton btn_close;
     //MY APPOINTMENTS
     private ArrayList<AppointmentDescription> list_appointments_today;
     private RecyclerView my_appointments_recycler;
@@ -64,6 +72,7 @@ public class HomeFragment extends Fragment {
     JSONArray array, array_my_appointments;
 
     private RelativeLayout empty;
+    private ProgressDialog dialog;
 
     public HomeFragment() {
     }
@@ -77,10 +86,13 @@ public class HomeFragment extends Fragment {
     }
 
     public void init() {
+        dialog = new ProgressDialog(getContext());
+        dialog.setCancelable(false);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         recyclerView = view.findViewById(R.id.home_fragment_recycler);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
 
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
@@ -88,6 +100,7 @@ public class HomeFragment extends Fragment {
         ((HomeActivity) getActivity()).setSupportActionBar(toolbar);
         empty = view.findViewById(R.id.vacio);
 
+        btn_close = view.findViewById(R.id.home_fragment_btn_exit);
         ///INICIAR ATRIBUTOS DEL PERFIL
         name_user = view.findViewById(R.id.fragment_home_text_user_name);
         image_user = view.findViewById(R.id.fragment_home_circle_view_user);
@@ -119,6 +132,71 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(((HomeActivity) getContext()));
+                builder.setMessage("¿Desea cerrar sesión?")
+                        .setCancelable(false)
+                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                logout();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+    }
+
+    public void logout() {
+        dialog.setMessage("Cerrando sesión");
+        dialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.LOGOUT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject object = new JSONObject(response);
+                            if (object.getBoolean("success")) {
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.clear();
+                                editor.apply();
+                                startActivity(new Intent(((HomeActivity) getContext()), AuthActivity.class));
+                                ((HomeActivity) getContext()).finish();
+                            }
+                        } catch (Exception e) {
+                            dialog.dismiss();
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "Las credenciales no coinciden", Toast.LENGTH_LONG).show();
+                        System.out.println(error);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = sharedPreferences.getString("token", "");
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", "Bearer " + token);
+                return map;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
     }
 
     private void getSpecialties() {
@@ -217,14 +295,13 @@ public class HomeFragment extends Fragment {
                                     appointmentDescription.setLast_name_d(specialty_object.getString("last_name_d"));
                                     appointmentDescription.setUrl_image_d(specialty_object.getString("url_image"));
 
-                                  //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
+                                    //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
                                     list_appointments_today.add(appointmentDescription);
 
                                 }
-                                if(list_appointments_today.size()==0){
+                                if (list_appointments_today.size() == 0) {
                                     empty.setVisibility(View.VISIBLE);
-                                }
-                                else {
+                                } else {
                                     empty.setVisibility(View.GONE);
                                 }
                                 MyAppointmentAdapter myAppointmentAdapter = new MyAppointmentAdapter(getContext(), list_appointments_today);
