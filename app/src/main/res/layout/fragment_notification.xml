@@ -138,7 +138,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/roboto_black"
-                            android:text="No Tienes Citas para hoy"
+                            android:text="No tienes pagos para mostrar"
                             android:textColor="@color/colorLightGrey" />
                         <ImageView
                             android:id="@+id/img_home"
