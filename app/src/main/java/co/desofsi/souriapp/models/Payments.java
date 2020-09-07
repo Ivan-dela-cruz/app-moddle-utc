@@ -3,10 +3,19 @@ package co.desofsi.souriapp.models;
 import java.io.Serializable;
 
 public class Payments implements Serializable {
-    private int id,id_patient,id_doctor,id_treatment;
-    private String document, updated_at, dues, reason, description, status, status_pay, price_total,name_p , last_name_p, name_d, last_name_d, name_s;
+    private int id, id_patient, id_doctor, id_treatment;
+    private String document, updated_at, dues, reason, description, status, status_pay, price_total, name_p, last_name_p, name_d, last_name_d, name_s;
+    private String url_file;
 
     public Payments() {
+    }
+
+    public String getUrl_file() {
+        return url_file;
+    }
+
+    public void setUrl_file(String url_file) {
+        this.url_file = url_file;
     }
 
     public int getId() {

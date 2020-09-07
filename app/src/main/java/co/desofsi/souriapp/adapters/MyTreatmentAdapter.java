@@ -1,6 +1,7 @@
 package co.desofsi.souriapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import co.desofsi.souriapp.R;
+import co.desofsi.souriapp.activities.AppointmentActivity;
+import co.desofsi.souriapp.activities.DetailTreatmentActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.models.AppointmentDescription;
 import co.desofsi.souriapp.models.Treatment;
@@ -59,6 +63,17 @@ public class MyTreatmentAdapter extends RecyclerView.Adapter<MyTreatmentAdapter.
             holder.txt_start.setText("$" + treatment.getPrice_total());
             holder.txt_reason.setText(treatment.getReason());
             Picasso.get().load(Constant.URL + treatment.getUrl_image()).into(holder.image_doctor);
+
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent =  new Intent(((HomeActivity)context), DetailTreatmentActivity.class);
+                    intent.putExtra("treatment",treatment);
+                    intent.putExtra("position",position);
+                    context.startActivity(intent);
+                }
+            });
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

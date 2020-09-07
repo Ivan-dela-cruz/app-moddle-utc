@@ -135,6 +135,7 @@ public class TreatmentFragment extends Fragment {
                                     treatment.setDescription(specialty_object.getString("description"));
                                     treatment.setStatus(specialty_object.getString("status"));
                                     treatment.setStatus_pay(specialty_object.getString("status_pay"));
+                                    treatment.setUrl_file(specialty_object.getString("url_file"));
 
                                     treatment.setUpdated_at(specialty_object.getString("updated_at"));
                                     treatment.setPrice_total(specialty_object.getString("price_total"));

@@ -57,6 +57,24 @@ public class MyAppointmentHistoryAdapter extends RecyclerView.Adapter<MyAppointm
                 pref = " PM";
             }
 
+            switch (appointmentDescription.getStatus()) {
+                case "Confirmado":
+                    holder.imageView.setImageResource(R.drawable.ic_baseline_check_circle_outline_24);
+                    break;
+                case "Pendiente":
+                    holder.imageView.setImageResource(R.drawable.ic_baseline_progress_24);
+                    break;
+                case "Anulado":
+                    holder.imageView.setImageResource(R.drawable.ic_baseline_close_24);
+                    break;
+                case "No asiste":
+                    holder.imageView.setImageResource(R.drawable.ic_baseline_hotel_24);
+                    break;
+                case "Atendido":
+                    holder.imageView.setImageResource(R.drawable.ic_baseline_emoji_emotions_24);
+                    break;
+            }
+
             holder.txt_name_specialty.setText(appointmentDescription.getSpecialty());
             holder.txt_name_doctor.setText("Dr. " + appointmentDescription.getName_d()
                     + " " + appointmentDescription.getLast_name_d());
@@ -91,7 +109,7 @@ public class MyAppointmentHistoryAdapter extends RecyclerView.Adapter<MyAppointm
     class SpecialtyHolder extends RecyclerView.ViewHolder {
 
         private TextView txt_name_doctor, txt_name_specialty, txt_start, txt_reason;
-        private ImageView image_doctor;
+        private ImageView image_doctor,imageView;
         private CardView cardView;
 
 
@@ -103,6 +121,7 @@ public class MyAppointmentHistoryAdapter extends RecyclerView.Adapter<MyAppointm
             txt_reason = itemView.findViewById(R.id.recycler_reason_my_appointment);
             image_doctor = itemView.findViewById(R.id.recycler_image_my_appointment);
             cardView = itemView.findViewById(R.id.recylcer_card_view_my_appointment);
+            imageView = itemView.findViewById(R.id.imageView);
 
 
         }

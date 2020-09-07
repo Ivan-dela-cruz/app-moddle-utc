@@ -6,10 +6,18 @@ public class Treatment implements Serializable {
     private int patient_id,doctor_id,specailty_id, id;
     private String reason,description,status,status_pay,updated_at,price_total,name_p,last_name_p,name_d,last_name_d,name_s;
 
-    private String url_image, url_image_s,color;
+    private String url_image, url_image_s,color,url_file;
 
     public Treatment() {
 
+    }
+
+    public String getUrl_file() {
+        return url_file;
+    }
+
+    public void setUrl_file(String url_file) {
+        this.url_file = url_file;
     }
 
     public String getColor() {

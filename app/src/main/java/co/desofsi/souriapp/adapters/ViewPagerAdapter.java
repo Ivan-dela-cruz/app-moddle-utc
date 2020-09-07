@@ -26,12 +26,12 @@ public class ViewPagerAdapter extends PagerAdapter {
     private String titles[] = {
             "Atención",
             "Citas",
-            "Operacion"
+            "Operaciones"
     };
     private String descriptions[] = {
-            "Quédate en casa si te sientes mal. Si tienes fiebre, tos y dificultad para respirar, busca atención médica.",
-            "La odontología es una de las ciencias de la salud que se encarga del diagnóstico, tratamiento y prevención.",
-            "La odontología es una de las ciencias de la salud que se encarga del diagnóstico, tratamiento y prevención."
+            "La experiencia y profecionalismo garantiza un sonrisa de calidad, en Souri contamos con especialistas posgraduados en Argentina.",
+            "Atendemos en diferentes especialidades ortodoncia, periodoncia, endodoncia, odontología para niños, prótesis e implantes.",
+            "Tecnología CAD CAM y altos estándares de Calidad."
     };
 
     @Override

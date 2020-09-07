@@ -151,7 +151,7 @@ public class CalendarFragment extends Fragment {
                                 } else {
                                     empty.setVisibility(View.GONE);
                                 }
-                                MyAppointmentAdapter myAppointmentAdapter = new MyAppointmentAdapter(getContext(), list_appointments);
+                                MyAppointmentHistoryAdapter myAppointmentAdapter = new MyAppointmentHistoryAdapter(getContext(), list_appointments);
                                 my_appointments_recycler.setAdapter(myAppointmentAdapter);
 
 

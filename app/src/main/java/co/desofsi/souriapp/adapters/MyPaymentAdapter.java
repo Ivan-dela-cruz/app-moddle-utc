@@ -1,6 +1,7 @@
 package co.desofsi.souriapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import co.desofsi.souriapp.R;
+import co.desofsi.souriapp.activities.DetailPaymentActivity;
+import co.desofsi.souriapp.activities.DetailTreatmentActivity;
+import co.desofsi.souriapp.activities.HomeActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.models.Payments;
 import co.desofsi.souriapp.models.Treatment;
@@ -45,7 +49,7 @@ public class MyPaymentAdapter extends RecyclerView.Adapter<MyPaymentAdapter.Spec
     public void onBindViewHolder(@NonNull SpecialtyHolder holder, final int position) {
 
         final Payments payments = list.get(position);
-        String pattern = "yyyy-MM-dd";
+        final String pattern = "yyyy-MM-dd";
         String data_treatment = payments.getUpdated_at().substring(0, 10);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         try {
@@ -58,6 +62,16 @@ public class MyPaymentAdapter extends RecyclerView.Adapter<MyPaymentAdapter.Spec
                     + " " + payments.getLast_name_d());
             holder.txt_start.setText("$" + payments.getPrice_total());
             holder.txt_reason.setText(payments.getReason());
+
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent =  new Intent(((HomeActivity)context), DetailPaymentActivity.class);
+                    intent.putExtra("payments",payments);
+                    intent.putExtra("position",position);
+                    context.startActivity(intent);
+                }
+            });
 
 
             switch (payments.getStatus()) {

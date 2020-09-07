@@ -135,6 +135,8 @@ public class NotificationFragment extends Fragment {
                                     payment.setStatus(specialty_object.getString("status"));
                                     payment.setStatus_pay(specialty_object.getString("status_pay"));
 
+                                    payment.setUrl_file(specialty_object.getString("url_file"));
+
                                     payment.setUpdated_at(specialty_object.getString("updated_at"));
                                     payment.setPrice_total(specialty_object.getString("price_total"));
                                     payment.setName_p(specialty_object.getString("name_p"));

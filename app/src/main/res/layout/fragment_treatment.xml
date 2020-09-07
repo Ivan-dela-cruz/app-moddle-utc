@@ -104,7 +104,7 @@
                                 android:fontFamily="@font/lato_black"
                                 android:gravity="center"
                                 android:padding="10dp"
-                                android:text="Una sonrisa se mantiene con amor, magía y odontología."
+                                android:text="Existimos para sanar tu sonrisa :)"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14dp" />
                         </LinearLayout>

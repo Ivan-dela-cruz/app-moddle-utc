@@ -2,8 +2,9 @@ package co.desofsi.souriapp.data;
 
 public class Constant {
 
-    public static  final String URL = "https://www.souridental.com/";
+    //public static  final String URL = "https://www.souridental.com/";
     //public static final String URL = "http://192.168.0.105:8000/";
+    public static final String URL = "http://192.168.0.100:8000/";
     public static final String URL_IMAGE = "http://192.168.0.102";
     public static final String HOME = URL + "api";
     public static final String LOGIN = HOME + "/login";
@@ -18,6 +19,8 @@ public class Constant {
     public static final String MY_APPOINTMENTS = HOME + "/app-get-my-appointments";
     public static final String MY_APPOINTMENTS_HISTORY = HOME + "/app-get-my-appointments-history";
     public static final String MY_TREATMENTS = HOME + "/app-get-my-treatments";
+    public static final String TREATMENT_DETAIL = HOME + "/app-get-detail-treatment";
     public static final String MY_PAYMENTS = HOME + "/app-get-my-payments";
+    public static final String PAYMENT_DETAIL = HOME + "/app-get-detail-payment";
 
 }
