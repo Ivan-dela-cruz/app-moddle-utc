@@ -3,6 +3,7 @@ package co.desofsi.souriapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.adapters.SpecialtyAdapter;
@@ -53,6 +54,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -127,6 +129,7 @@ public class AppointmentActivity extends AppCompatActivity {
         getSpecialties();
 
         eventButtons();
+
     }
 
     private void init() {
@@ -282,11 +285,17 @@ public class AppointmentActivity extends AppCompatActivity {
         date_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.add(Calendar.DATE, 0); // Add 0 days to Calendar
+                Date newDate = calendar.getTime();
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AppointmentActivity.this
                         , new DateApointmentPicker(),
                         Calendar.getInstance().get(Calendar.YEAR),
                         Calendar.getInstance().get(Calendar.MONTH),
                         Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMinDate(newDate.getTime() - (newDate.getTime() % (24 * 60 * 60 * 1000)));
                 datePickerDialog.show();
             }
         });
@@ -300,7 +309,6 @@ public class AppointmentActivity extends AppCompatActivity {
         text_time.setText(appointment.getStart());
         text_doctor.setText(doctor_selected);
         text_specialty.setText(specialty_selected);
-
 
 
     }
@@ -433,7 +441,7 @@ public class AppointmentActivity extends AppCompatActivity {
         final String id_specialty = String.valueOf(appointment.getId_specialty());
         final String id_doctor = String.valueOf(appointment.getId_doctor());
         final String date = appointment.getDate() + " 00:00:00";
-        final String start = appointment.getDate() + " " + appointment.getStart()+":00";
+        final String start = appointment.getDate() + " " + appointment.getStart() + ":00";
         final String end = start;
         final String status = "Pendiente";
 
@@ -534,7 +542,8 @@ public class AppointmentActivity extends AppCompatActivity {
         }
     }
 
-    class DateApointmentPicker implements DatePickerDialog.OnDateSetListener {
+    class DateApointmentPicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
 
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -633,6 +642,11 @@ public class AppointmentActivity extends AppCompatActivity {
 
         public void loadTimesAppointment() {
 
+            int hour24hrs = calendar.get(Calendar.HOUR_OF_DAY);
+
+            int minutes = calendar.get(Calendar.MINUTE);
+            int seconds = calendar.get(Calendar.SECOND);
+
             int times_avalible = 36;
             int init_time = 9;
             int interval = 15;
@@ -663,18 +677,40 @@ public class AppointmentActivity extends AppCompatActivity {
 
                 hour = hourcollapse(hour);
 
+
+
                 if (!hour.equals("")) {
-                    if (init_time < 13) {
-                        RadioButton radioButton = new RadioButton(AppointmentActivity.this);
-                        radioButton.setId(i);
-                        radioButton.setText(hour);
-                        radioGroup_times.addView(radioButton);
+
+                    if (init_time < 13 && init_time >= hour24hrs) {
+                        System.out.println("MAÑANA =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
+                        if(init_time== hour24hrs && minutes<cont){
+                            RadioButton radioButton = new RadioButton(AppointmentActivity.this);
+                            radioButton.setId(i);
+                            radioButton.setText(hour);
+                            radioGroup_times.addView(radioButton);
+                        }
+                        if(init_time >hour24hrs){
+                            RadioButton radioButton = new RadioButton(AppointmentActivity.this);
+                            radioButton.setId(i);
+                            radioButton.setText(hour);
+                            radioGroup_times.addView(radioButton);
+                        }
                     }
-                    if (init_time > 14) {
-                        RadioButton radioButton = new RadioButton(AppointmentActivity.this);
-                        radioButton.setId(i);
-                        radioButton.setText(hour);
-                        radioGroup_times.addView(radioButton);
+                    if (init_time > 14 && init_time >= hour24hrs) {
+                        System.out.println("TARDES =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
+                        if(init_time== hour24hrs && minutes<cont){
+                            RadioButton radioButton = new RadioButton(AppointmentActivity.this);
+                            radioButton.setId(i);
+                            radioButton.setText(hour);
+                            radioGroup_times.addView(radioButton);
+                        }
+                        if(init_time >hour24hrs){
+                            RadioButton radioButton = new RadioButton(AppointmentActivity.this);
+                            radioButton.setId(i);
+                            radioButton.setText(hour);
+                            radioGroup_times.addView(radioButton);
+                        }
+
                     }
                 }
 

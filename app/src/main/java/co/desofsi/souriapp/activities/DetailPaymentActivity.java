@@ -82,7 +82,7 @@ public class DetailPaymentActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         payments = (Payments) getIntent().getExtras().getSerializable("payments");
-        Toast.makeText(DetailPaymentActivity.this, "" + payments.getUrl_file(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DetailPaymentActivity.this, "" + payments.getUrl_file(), Toast.LENGTH_SHORT).show();
         init();
         eventsButtons();
         loadReviewtreatment();
