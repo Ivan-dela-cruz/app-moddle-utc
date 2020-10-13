@@ -62,16 +62,10 @@ public class SingInFragment extends Fragment {
         txt_email = view.findViewById(R.id.text_email_sing_in);
         txt_password = view.findViewById(R.id.text_password_sing_in);
         btn_sin_in = view.findViewById(R.id.btn_sing_in);
-        txt_sing_in = view.findViewById(R.id.text_sing_in);
         dialog = new ProgressDialog(getContext());
         dialog.setCancelable(false);
 
-        txt_sing_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_auth_container, new SingUpFragment()).commit();
-            }
-        });
+
         btn_sin_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

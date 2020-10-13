@@ -35,6 +35,7 @@ import java.util.Map;
 
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.activities.HomeActivity;
+import co.desofsi.souriapp.activities.PasswordActivity;
 import co.desofsi.souriapp.data.Constant;
 import co.desofsi.souriapp.init.AuthActivity;
 import co.desofsi.souriapp.init.UserProfileActivity;
@@ -47,7 +48,7 @@ public class AccountFragment extends Fragment {
     SharedPreferences sharedPreferences;
     private User user_login;
 
-    private ImageButton btn_edit, btn_close;
+    private ImageButton btn_edit, btn_close,btn_pass;
     private CircleImageView img_user;
     private TextView txt_names, txt_email, txt_ci, txt_birth, txt_gender, txt_address, txt_treatments, txt_appointments;
 
@@ -73,6 +74,7 @@ public class AccountFragment extends Fragment {
 
         btn_close = view.findViewById(R.id.account_fragment_btn_close);
         btn_edit = view.findViewById(R.id.account_fragment_btn_edit);
+        btn_pass = view.findViewById(R.id.account_fragment_btn_password);
         txt_names = view.findViewById(R.id.account_fragment_txt_names);
         txt_email = view.findViewById(R.id.account_fragment_txt_email);
         txt_address = view.findViewById(R.id.account_fragment_txt_address);
@@ -86,6 +88,13 @@ public class AccountFragment extends Fragment {
     }
 
     public void eventsButtons() {
+        btn_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

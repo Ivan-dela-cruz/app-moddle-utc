@@ -12,6 +12,7 @@ public class Constant {
     public static final String REGISTER = HOME + "/register";
     public static final String PROFILE = HOME + "/profile";
     public static final String SAVE_PROFILE = HOME + "/save-profile-user";
+    public static final String UPDATE_PASSWORD = HOME + "/change-password";
     public static final String SPECIALTIES = HOME + "/app-specialties";
     public static final String DOCTORS = HOME + "/app-doctors";
     public static final String TIMES = HOME + "/app-times";

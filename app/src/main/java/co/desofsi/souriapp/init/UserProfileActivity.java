@@ -2,6 +2,7 @@ package co.desofsi.souriapp.init;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import co.desofsi.souriapp.R;
 import co.desofsi.souriapp.activities.HomeActivity;
@@ -18,6 +19,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +46,8 @@ import java.util.Map;
 public class UserProfileActivity extends AppCompatActivity {
 
     private View view;
-    private TextInputLayout layout_name, layout_last_name, layout_password, layout_cofirm_pass;
-    private TextInputEditText txt_name, txt_last_name, txt_password, txt_confirm_pass;
+    private TextInputLayout layout_name, layout_last_name;
+    private TextInputEditText txt_name, txt_last_name;
     private Button btn_save;
     private CircleImageView image;
     private TextView txt_selected;
@@ -58,6 +61,18 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                //window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+                window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorAnimals));
+                //getWindow().setStatusBarColor(Color.BLACK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         init();
     }
 
@@ -65,13 +80,11 @@ public class UserProfileActivity extends AppCompatActivity {
         userPref = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         layout_name = findViewById(R.id.profile_text_name_layout);
         layout_last_name = findViewById(R.id.profile_text_last_name_layout);
-        layout_password = findViewById(R.id.profile_text_password_layout);
-        layout_cofirm_pass = findViewById(R.id.profile_text_confirm_password_layout);
+
 
         txt_name = findViewById(R.id.profile_text_name);
         txt_last_name = findViewById(R.id.profile_text_last_name);
-        txt_password = findViewById(R.id.profile_text_password);
-        txt_confirm_pass = findViewById(R.id.profile_text_confirm_password);
+
         btn_save = findViewById(R.id.profile_btn_save);
         txt_selected = findViewById(R.id.profile_selec_photo);
         image = findViewById(R.id.profile_img_user);
@@ -109,8 +122,7 @@ public class UserProfileActivity extends AppCompatActivity {
         dialog.show();
         final String name = txt_name.getText().toString().trim();
         final String last_name = txt_last_name.getText().toString().trim();
-        final String password = txt_password.getText().toString().trim();
-        final String confir_password = txt_confirm_pass.getText().toString().trim();
+
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SAVE_PROFILE,
@@ -158,7 +170,6 @@ public class UserProfileActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name", name);
                 map.put("last_name", last_name);
-                map.put("password", password);
                 map.put("url_image", bitmapToString(bitmap));
 
                 return map;
@@ -192,16 +203,7 @@ public class UserProfileActivity extends AppCompatActivity {
             layout_last_name.setError("El apellido es obligatorio");
             return false;
         }
-        if (txt_password.getText().toString().length() < 7) {
-            layout_password.setErrorEnabled(true);
-            layout_password.setError("La contraseña debe tener al menos 8 carácteres");
-            return false;
-        }
-        if (!txt_confirm_pass.getText().toString().equals(txt_password.getText().toString())) {
-            layout_cofirm_pass.setErrorEnabled(true);
-            layout_cofirm_pass.setError("Las contraseñas no son iguales");
-            return false;
-        }
+
         return true;
     }
 

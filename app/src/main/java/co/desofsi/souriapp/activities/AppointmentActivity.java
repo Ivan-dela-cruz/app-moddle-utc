@@ -643,9 +643,8 @@ public class AppointmentActivity extends AppCompatActivity {
         public void loadTimesAppointment() {
 
             int hour24hrs = calendar.get(Calendar.HOUR_OF_DAY);
-
             int minutes = calendar.get(Calendar.MINUTE);
-            int seconds = calendar.get(Calendar.SECOND);
+
 
             int times_avalible = 36;
             int init_time = 9;
@@ -682,7 +681,7 @@ public class AppointmentActivity extends AppCompatActivity {
                 if (!hour.equals("")) {
 
                     if (init_time < 13 && init_time >= hour24hrs) {
-                        System.out.println("MAÑANA =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
+                        //System.out.println("MAÑANA =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
                         if(init_time== hour24hrs && minutes<cont){
                             RadioButton radioButton = new RadioButton(AppointmentActivity.this);
                             radioButton.setId(i);
@@ -697,7 +696,7 @@ public class AppointmentActivity extends AppCompatActivity {
                         }
                     }
                     if (init_time > 14 && init_time >= hour24hrs) {
-                        System.out.println("TARDES =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
+                        //System.out.println("TARDES =>>" + cont + " <<== "+hour24hrs+"=>>" + minutes);
                         if(init_time== hour24hrs && minutes<cont){
                             RadioButton radioButton = new RadioButton(AppointmentActivity.this);
                             radioButton.setId(i);
