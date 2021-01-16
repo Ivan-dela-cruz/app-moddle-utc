@@ -75,6 +75,7 @@
                     android:layout_height="match_parent">
 
                     <androidx.cardview.widget.CardView
+                        android:visibility="gone"
                         android:id="@+id/fragment_home_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="Tratamientos"
+                        android:text="Tareas"
                         android:textColor="@color/colorGrey"
                         android:textSize="16sp" />
 
@@ -140,7 +141,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/roboto_black"
-                            android:text="No tienes tratamientos para mostrar"
+                            android:text="No tienes tareas para mostrar"
                             android:textColor="@color/colorLightGrey" />
                         <ImageView
                             android:id="@+id/img_home"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#57c0c7</color>
-    <color name="colorPrimaryDark">#2b9197</color>
-    <color name="colorAccent">#2196f1</color>
+    <color name="colorPrimary">#25B1F9</color>
+    <color name="colorPrimaryDark">#2B94F3</color>
+    <color name="colorAccent">#25B1F9</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#666666</color>
@@ -12,9 +12,9 @@
 
     <color name="colorTurquezaBajo">#b3d9dd</color>
     <color name="colorTurquezaMedio">#92d9e1</color>
-    <color name="colorTurquezaOscuro">#10a792</color>
+    <color name="colorTurquezaOscuro">#2B94F3</color>
     <color name="colorTurquezaBlack">#2b9197</color>
-    <color name="colorTurquezaNormal">#57c0c7</color>
+    <color name="colorTurquezaNormal">#25B1F9</color>
     <color name="colorTurquezaBanco">#ccecf0</color>
     <color name="colorTurquezaLight">#daeaf9</color>
     <color name="colorAzulClaro">#b4d7f9</color>
