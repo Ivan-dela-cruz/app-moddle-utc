@@ -15,21 +15,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="co.desofsi.cursosutc.activities.PasswordActivity"  android:screenOrientation="portrait" ></activity>
-        <activity android:name="co.desofsi.cursosutc.activities.DetailPaymentActivity" />
-        <activity android:name="co.desofsi.cursosutc.activities.DetailTreatmentActivity" />
-        <activity android:name="co.desofsi.cursosutc.activities.AppointmentActivity" />
+        <activity android:name=".activities.LevelsActivity"/>
         <activity
-            android:name="co.desofsi.cursosutc.activities.HomeActivity"
+            android:name=".activities.PasswordActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="co.desofsi.cursosutc.init.UserProfileActivity" />
+        <activity android:name=".activities.DetailPaymentActivity" />
+        <activity android:name=".activities.DetailTreatmentActivity" />
+        <activity android:name=".activities.AppointmentActivity" />
         <activity
-            android:name="co.desofsi.cursosutc.init.AuthActivity"
+            android:name=".activities.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".init.UserProfileActivity" />
+        <activity
+            android:name=".init.AuthActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="co.desofsi.cursosutc.init.OnBoardActivity"
+            android:name=".init.OnBoardActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="co.desofsi.cursosutc.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
