@@ -16,8 +16,8 @@ public class Constant {
 
     //NUEVAS RUTAS
     public static final String HOME_PERIODS = HOME + "/home-periods";
-    public static final String LEVELS = HOME+"/levels-by-student";
-
+    public static final String LEVELS = HOME + "/levels-by-student";
+    public static final String SUBJECTS = HOME + "/subjects-by-student/";
 
 
     public static final String SPECIALTIES = HOME + "/app-specialties";
@@ -30,5 +30,8 @@ public class Constant {
     public static final String TREATMENT_DETAIL = HOME + "/app-get-detail-treatment";
     public static final String MY_PAYMENTS = HOME + "/app-get-my-payments";
     public static final String PAYMENT_DETAIL = HOME + "/app-get-detail-payment";
+
+
+    public static int LEVEL_ID = 0;
 
 }

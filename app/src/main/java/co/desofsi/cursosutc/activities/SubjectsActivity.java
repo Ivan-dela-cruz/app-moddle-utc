@@ -30,25 +30,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.desofsi.cursosutc.R;
+
+
 import co.desofsi.cursosutc.adapters.LevelAdapter;
+import co.desofsi.cursosutc.adapters.SubjectAdapter;
 import co.desofsi.cursosutc.data.Constant;
 import co.desofsi.cursosutc.models.Level;
+import co.desofsi.cursosutc.models.Subject;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LevelsActivity extends AppCompatActivity {
 
-    CircleImageView btnBackLevels;
+public class SubjectsActivity extends AppCompatActivity {
+    CircleImageView btnBackSubjects;
     RecyclerView recyclerView;
-    private ArrayList<Level> list_levels;
+    private ArrayList<Subject> list_subjects;
     private SharedPreferences sharedPreferences;
     JSONArray array;
-    private LevelAdapter levelAdapter;
+    private SubjectAdapter subjectAdapter;
     private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_levels);
+        setContentView(R.layout.activity_subjects);
         try {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 Window window = getWindow();
@@ -63,8 +67,8 @@ public class LevelsActivity extends AppCompatActivity {
         init();
 
         //back to menu estates
-        final Intent intent = new Intent(LevelsActivity.this, HomeActivity.class);
-        btnBackLevels.setOnClickListener(new View.OnClickListener() {
+        final Intent intent = new Intent(SubjectsActivity.this, LevelsActivity.class);
+        btnBackSubjects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -76,25 +80,24 @@ public class LevelsActivity extends AppCompatActivity {
     private void init() {
 //
         sharedPreferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        btnBackLevels = (CircleImageView) findViewById(R.id.btnBackLevels);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerLevels);
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLevels);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(LevelsActivity.this, LinearLayoutManager.VERTICAL, false);
+        btnBackSubjects = (CircleImageView) findViewById(R.id.btnBackSubjects);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerSubjects);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeSubjects);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SubjectsActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-       getLevels();
+        getSubjects();
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getLevels();
+                getSubjects();
             }
         });
     }
-
-   private void getLevels() {
-        list_levels = new ArrayList<>();
+    private void getSubjects() {
+        list_subjects = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-        String url = Constant.LEVELS;
+        String url = Constant.SUBJECTS+Constant.LEVEL_ID;
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -103,22 +106,22 @@ public class LevelsActivity extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             if (object.getBoolean("success")) {
-                                array = new JSONArray(object.getString("levels"));
+                                array = new JSONArray(object.getString("subjects"));
 
                                 for (int i = 0; i < array.length(); i++) {
                                     JSONObject level_object = array.getJSONObject(i);
 
-                                    Level level = new Level();
-                                    level.setStudent_id(level_object.getInt("student_id"));
-                                    level.setLevel_id(level_object.getInt("level_id"));
-                                    level.setName(level_object.getString("name"));
-                                  //  employee.setUrlImage(level_object.getString("url_image"));
+                                    Subject subject = new Subject();
+                                    subject.setStudent_id(level_object.getInt("student_id"));
+                                    subject.setSubject_id(level_object.getInt("subject_id"));
+                                    subject.setName(level_object.getString("name"));
+                                    //  employee.setUrlImage(level_object.getString("url_image"));
 
-                                    list_levels.add(level);
+                                    list_subjects.add(subject);
 
                                 }
-                                levelAdapter = new LevelAdapter(LevelsActivity.this, list_levels);
-                                recyclerView.setAdapter(levelAdapter);
+                                subjectAdapter = new SubjectAdapter(SubjectsActivity.this, list_subjects);
+                                recyclerView.setAdapter(subjectAdapter);
 
                             }
 
@@ -147,8 +150,9 @@ public class LevelsActivity extends AppCompatActivity {
             }
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(LevelsActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(SubjectsActivity.this);
         requestQueue.add(stringRequest);
 
     }
+
 }
