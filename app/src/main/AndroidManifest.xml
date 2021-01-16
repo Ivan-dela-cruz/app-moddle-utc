@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.SubjectsActivity"></activity>
+        <activity android:name=".activities.CoursesActivity"></activity>
+        <activity android:name=".activities.SubjectsActivity" />
         <activity android:name=".activities.LevelsActivity" />
         <activity
             android:name=".activities.PasswordActivity"

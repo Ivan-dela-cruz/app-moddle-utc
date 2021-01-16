@@ -18,6 +18,7 @@ public class Constant {
     public static final String HOME_PERIODS = HOME + "/home-periods";
     public static final String LEVELS = HOME + "/levels-by-student";
     public static final String SUBJECTS = HOME + "/subjects-by-student/";
+    public static final String COURSES = HOME + "/courses-by-subject/";
 
 
     public static final String SPECIALTIES = HOME + "/app-specialties";
@@ -33,5 +34,7 @@ public class Constant {
 
 
     public static int LEVEL_ID = 0;
+    public static int SUBJECT_ID = 0;
+    public static int PERIOD_ID = 0;
 
 }
