@@ -30,29 +30,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.desofsi.cursosutc.R;
-
-
-import co.desofsi.cursosutc.adapters.LevelAdapter;
+import co.desofsi.cursosutc.adapters.CourseAdapter;
 import co.desofsi.cursosutc.adapters.SubjectAdapter;
 import co.desofsi.cursosutc.data.Constant;
-import co.desofsi.cursosutc.models.Level;
+import co.desofsi.cursosutc.models.Course;
 import co.desofsi.cursosutc.models.Subject;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+public class CoursesActivity extends AppCompatActivity {
 
-public class SubjectsActivity extends AppCompatActivity {
-    CircleImageView btnBackSubjects;
+    CircleImageView btnBackCourses;
     RecyclerView recyclerView;
-    private ArrayList<Subject> list_subjects;
+    private ArrayList<Course> list_courses;
     private SharedPreferences sharedPreferences;
     JSONArray array;
-    private SubjectAdapter subjectAdapter;
+    private CourseAdapter courseAdapter;
     private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subjects);
+        setContentView(R.layout.activity_courses);
         try {
             if (android.os.Build.VERSION.SDK_INT >= 21) {
                 Window window = getWindow();
@@ -67,8 +65,8 @@ public class SubjectsActivity extends AppCompatActivity {
         init();
 
         //back to menu estates
-        final Intent intent = new Intent(SubjectsActivity.this, LevelsActivity.class);
-        btnBackSubjects.setOnClickListener(new View.OnClickListener() {
+        final Intent intent = new Intent(CoursesActivity.this, SubjectsActivity.class);
+        btnBackCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -80,24 +78,25 @@ public class SubjectsActivity extends AppCompatActivity {
     private void init() {
 //
         sharedPreferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        btnBackSubjects = (CircleImageView) findViewById(R.id.btnBackSubjects);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerSubjects);
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeSubjects);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SubjectsActivity.this, LinearLayoutManager.VERTICAL, false);
+        btnBackCourses = (CircleImageView) findViewById(R.id.btnBackCourses);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerCourses);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeCourses);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoursesActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        getSubjects();
+        getCourses();
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getSubjects();
+                getCourses();
             }
         });
     }
-    private void getSubjects() {
-        list_subjects = new ArrayList<>();
+
+    private void getCourses() {
+        list_courses = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-        String url = Constant.SUBJECTS+Constant.LEVEL_ID;
+        String url = Constant.COURSES+Constant.SUBJECT_ID+"/"+Constant.PERIOD_ID;
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -106,23 +105,27 @@ public class SubjectsActivity extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             if (object.getBoolean("success")) {
-                                array = new JSONArray(object.getString("subjects"));
+                                array = new JSONArray(object.getString("courses"));
 
                                 for (int i = 0; i < array.length(); i++) {
                                     JSONObject level_object = array.getJSONObject(i);
 
-                                    Subject subject = new Subject();
-                                    subject.setPeriod_id(level_object.getInt("period_id"));
-                                    subject.setStudent_id(level_object.getInt("student_id"));
-                                    subject.setSubject_id(level_object.getInt("subject_id"));
-                                    subject.setName(level_object.getString("name"));
+                                    Course course = new Course();
+                                    course.setTitle(level_object.getString("title"));
+                                    course.setName(level_object.getString("name"));
+                                    course.setLast_name(level_object.getString("last_name"));
+                                    course.setDescription(level_object.getString("description"));
+                                    course.setUrl_image(level_object.getString("url_image"));
+                                    course.setTeacher_id(level_object.getInt("teacher_id"));
+                                    course.setSubject_id(level_object.getInt("subject_id"));
+
                                     //  employee.setUrlImage(level_object.getString("url_image"));
 
-                                    list_subjects.add(subject);
+                                    list_courses.add(course);
 
                                 }
-                                subjectAdapter = new SubjectAdapter(SubjectsActivity.this, list_subjects);
-                                recyclerView.setAdapter(subjectAdapter);
+                                courseAdapter = new CourseAdapter(CoursesActivity.this, list_courses);
+                                recyclerView.setAdapter(courseAdapter);
 
                             }
 
@@ -151,9 +154,8 @@ public class SubjectsActivity extends AppCompatActivity {
             }
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(SubjectsActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(CoursesActivity.this);
         requestQueue.add(stringRequest);
 
     }
-
 }

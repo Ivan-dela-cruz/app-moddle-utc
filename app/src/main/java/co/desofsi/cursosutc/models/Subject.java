@@ -1,10 +1,11 @@
 package co.desofsi.cursosutc.models;
 
 public class Subject {
-    int student_id,subject_id;
+    int period_id, student_id,subject_id;
     String name, description, urlImage;
 
-    public Subject(int student_id, int subject_id, String name, String description, String urlImage) {
+    public Subject(int period_id, int student_id, int subject_id, String name, String description, String urlImage) {
+        this.period_id = period_id;
         this.student_id = student_id;
         this.subject_id = subject_id;
         this.name = name;
@@ -13,6 +14,14 @@ public class Subject {
     }
 
     public Subject() {
+    }
+
+    public int getPeriod_id() {
+        return period_id;
+    }
+
+    public void setPeriod_id(int period_id) {
+        this.period_id = period_id;
     }
 
     public int getStudent_id() {

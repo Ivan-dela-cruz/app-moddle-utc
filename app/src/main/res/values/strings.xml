@@ -83,5 +83,6 @@
 
     <string name="levels">Niveles</string>
     <string name="subjects">Materias</string>
+    <string name="courses">Cursos</string>
 
 </resources>

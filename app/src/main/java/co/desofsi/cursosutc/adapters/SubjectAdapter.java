@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 import co.desofsi.cursosutc.R;
 
+import co.desofsi.cursosutc.activities.CoursesActivity;
+import co.desofsi.cursosutc.activities.LevelsActivity;
 import co.desofsi.cursosutc.activities.SubjectsActivity;
 import co.desofsi.cursosutc.data.Constant;
 
@@ -56,9 +58,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
         holder.cardViewSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "subject_id:  " + subject.getSubject_id(), Toast.LENGTH_SHORT).show();
-            }
+                Constant.SUBJECT_ID = subject.getSubject_id();
+                Constant.PERIOD_ID = subject.getPeriod_id();
+                Intent intent = new Intent((SubjectsActivity)context, CoursesActivity.class);
+                context.startActivity(intent);
+             }
         });
+
     }
 
     @Override
