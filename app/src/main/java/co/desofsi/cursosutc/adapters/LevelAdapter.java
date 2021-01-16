@@ -1,19 +1,21 @@
 package co.desofsi.cursosutc.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
-
 import co.desofsi.cursosutc.R;
+import co.desofsi.cursosutc.activities.LevelsActivity;
+import co.desofsi.cursosutc.activities.SubjectsActivity;
+import co.desofsi.cursosutc.data.Constant;
 import co.desofsi.cursosutc.models.Level;
 
 import java.util.ArrayList;
@@ -39,25 +41,24 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
     @Override
     public void onBindViewHolder(@NonNull LevelHolder holder, final int position) {
 
-        final Level employee = list_level.get(position);
+        final Level level = list_level.get(position);
 
         // Picasso.get().load(Constant.URL+"img/users/"+specialty.getDoctor().getUrl_image()).into(holder.image_doctor);
-
         //  Picasso.get().load(Constant.URL+employee.getUrlImage()).into(holder.imageEmployee); //descomentar en produccion
         //Picasso.get().load(employee.getUrlImage()).into(holder.imageEmployee);
         // Picasso.get().load("https://i.imgur.com/tGbaZCY.jpg").into(holder.image_estate);
-        holder.lblNameLevel.setText(employee.getName());
-
-        //   holder.cardView.setCardBackgroundColor(Color.parseColor(String.valueOf(R.color.colorRed)));
+        holder.lblNameLevel.setText(level.getName());
         holder.cardViewLevel.setRadius(40);
 
-       /* holder.cardViewEstate.setOnClickListener(new View.OnClickListener() {
+
+       holder.cardViewLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent((HomeActivity)context, MenuEstatesActivity.class);
+                Constant.LEVEL_ID = level.getLevel_id();
+                Intent intent = new Intent((LevelsActivity)context, SubjectsActivity.class);
                 context.startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override
