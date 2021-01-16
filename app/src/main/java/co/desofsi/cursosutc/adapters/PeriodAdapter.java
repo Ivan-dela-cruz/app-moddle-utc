@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,7 +21,9 @@ import java.util.ArrayList;
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.activities.AppointmentActivity;
 import co.desofsi.cursosutc.activities.HomeActivity;
+import co.desofsi.cursosutc.activities.LevelsActivity;
 import co.desofsi.cursosutc.data.Constant;
+import co.desofsi.cursosutc.models.Level;
 import co.desofsi.cursosutc.models.Period;
 import co.desofsi.cursosutc.models.Specialty;
 
@@ -54,10 +57,9 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.SpecialtyH
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(((HomeActivity)context), AppointmentActivity.class);
-                intent.putExtra("specialty",period);
-                intent.putExtra("position",position);
+                Intent intent =  new Intent(((HomeActivity)context), LevelsActivity.class);
                 context.startActivity(intent);
+            //    Toast.makeText(context, "clicked item : ", Toast.LENGTH_SHORT).show();
             }
         });
     }
