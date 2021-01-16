@@ -203,7 +203,7 @@ public class HomeFragment extends Fragment {
     private void getPeriods() {
         lis_periods = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-
+      //  System.out.println(Constant.HOME_PERIODS);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.HOME_PERIODS,
                 new Response.Listener<String>() {
                     @Override
