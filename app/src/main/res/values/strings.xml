@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SOURI</string>
+    <string name="app_name">UTC ClassRooms</string>
     <string name="main_page_selected">%s page is selected</string>
 
     <string name="label_login">Inicio de sesión</string>

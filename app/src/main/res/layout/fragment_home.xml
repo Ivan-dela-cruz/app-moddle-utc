@@ -14,14 +14,13 @@
         android:elevation="5dp"
         android:theme="@style/AppTheme.BottomAppbar"
         android:visibility="visible"
-        android:background="@color/colorTurquezaNormal"
+        android:background="@color/colorWhite"
         app:title=" ">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="vertical">
-
 
             <ImageView
                 android:layout_width="100dp"
@@ -82,7 +81,6 @@
                         android:layout_height="40dp"
                         android:layout_marginLeft="5px"
                         android:layout_gravity="center"
-
                         android:src="@drawable/user" />
 
                     <TextView
@@ -107,7 +105,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Cursos"
+                android:text="Periodos Académicos"
                 android:textColor="@color/colorGrey"
                 android:textSize="16sp" />
 
