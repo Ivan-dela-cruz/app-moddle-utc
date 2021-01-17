@@ -2,6 +2,7 @@ package co.desofsi.cursosutc.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import co.desofsi.cursosutc.R;
 
@@ -51,9 +53,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
         //  Picasso.get().load(Constant.URL+employee.getUrlImage()).into(holder.imageEmployee); //descomentar en produccion
         //Picasso.get().load(employee.getUrlImage()).into(holder.imageEmployee);
         // Picasso.get().load("https://i.imgur.com/tGbaZCY.jpg").into(holder.image_estate);
+        int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5, R.drawable.l6, R.drawable.l7, R.drawable.l8, R.drawable.l9, R.drawable.l10, R.drawable.l11, R.drawable.l12, R.drawable.l13, R.drawable.l14, R.drawable.l15};
+        Random rand = new Random();
+
+        holder.imgSubject.setImageResource(images[rand.nextInt(images.length)]);
         holder.lblNameSubject.setText(subject.getName());
         holder.cardViewSubject.setRadius(40);
-
+        holder.cardViewSubject.setCardBackgroundColor(Color.parseColor("#40f5f5f5"));
 
         holder.cardViewSubject.setOnClickListener(new View.OnClickListener() {
             @Override

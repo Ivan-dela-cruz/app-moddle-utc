@@ -2,6 +2,7 @@ package co.desofsi.cursosutc.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.activities.LevelsActivity;
 import co.desofsi.cursosutc.activities.SubjectsActivity;
@@ -19,6 +21,7 @@ import co.desofsi.cursosutc.data.Constant;
 import co.desofsi.cursosutc.models.Level;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder> {
 
@@ -42,6 +45,10 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
     public void onBindViewHolder(@NonNull LevelHolder holder, final int position) {
 
         final Level level = list_level.get(position);
+        int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5, R.drawable.l6, R.drawable.l7, R.drawable.l8, R.drawable.l9, R.drawable.l10, R.drawable.l11, R.drawable.l12, R.drawable.l13, R.drawable.l14, R.drawable.l15};
+        Random rand = new Random();
+
+        holder.imgLevel.setImageResource(images[rand.nextInt(images.length)]);
 
         // Picasso.get().load(Constant.URL+"img/users/"+specialty.getDoctor().getUrl_image()).into(holder.image_doctor);
         //  Picasso.get().load(Constant.URL+employee.getUrlImage()).into(holder.imageEmployee); //descomentar en produccion
@@ -50,12 +57,13 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
         holder.lblNameLevel.setText(level.getName());
         holder.cardViewLevel.setRadius(40);
 
-
-       holder.cardViewLevel.setOnClickListener(new View.OnClickListener() {
+        holder.cardViewLevel.setCardBackgroundColor(Color.parseColor("#40f5f5f5"));
+        holder.cardViewLevel.setBackgroundResource(R.drawable.grey_gradient);
+        holder.cardViewLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Constant.LEVEL_ID = level.getLevel_id();
-                Intent intent = new Intent((LevelsActivity)context, SubjectsActivity.class);
+                Intent intent = new Intent((LevelsActivity) context, SubjectsActivity.class);
                 context.startActivity(intent);
             }
         });
