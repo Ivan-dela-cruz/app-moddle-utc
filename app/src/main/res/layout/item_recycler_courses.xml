@@ -37,20 +37,39 @@
                     android:src="@color/colorLightGrey" />
 
                 <TextView
-                    android:id="@+id/lblNameCourse"
+                    android:background="@drawable/square_orange_bg"
+                    android:id="@+id/lblTitleCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="82dp"
-                    android:layout_marginEnd="9dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/levels"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15sp" />
+                    android:text="@string/courses"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+
+                <TextView
+                    android:background="@drawable/square_green_bg"
+                    android:id="@+id/lblNameCourse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblTitleCourse"
+                    android:layout_alignParentStart="true"
+
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/courses"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
 
 
             </RelativeLayout>
