@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.activities.AppointmentActivity;
@@ -48,15 +49,20 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.SpecialtyH
     public void onBindViewHolder(@NonNull SpecialtyHolder holder, final int position) {
 
         final Period period = list.get(position);
-        Picasso.get().load(Constant.URL+period.getUrl_image()).into(holder.image_specialty);
-        holder.txt_name_specialty.setText(period.getName());
-        holder.text_status_specialty.setText(period.getEnd_date());
+        int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5, R.drawable.l6, R.drawable.l7, R.drawable.l8, R.drawable.l9, R.drawable.l10, R.drawable.l11, R.drawable.l12, R.drawable.l13, R.drawable.l14, R.drawable.l15};
+        Random rand = new Random();
+
+     //   Picasso.get().load(Constant.URL+period.getUrl_image()).into(holder.image_specialty);
+        holder.imagePeriod.setImageResource(images[rand.nextInt(images.length)]);
+        holder.txtNamePeriod.setText(period.getName());
+        holder.txtEndDatePeriod.setText(period.getEnd_date());
         holder.cardView.setCardBackgroundColor(Color.parseColor(period.getColor()));
         holder.cardView.setRadius(40);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Constant.PERIOD_ID = period.getId();
                 Intent intent =  new Intent(((HomeActivity)context), LevelsActivity.class);
                 context.startActivity(intent);
             //    Toast.makeText(context, "clicked item : ", Toast.LENGTH_SHORT).show();
@@ -72,16 +78,16 @@ public class PeriodAdapter extends RecyclerView.Adapter<PeriodAdapter.SpecialtyH
 
     class SpecialtyHolder extends RecyclerView.ViewHolder{
 
-        private TextView txt_name_specialty,text_status_specialty;
-        private ImageView image_specialty;
+        private TextView txtNamePeriod,txtEndDatePeriod;
+        private ImageView imagePeriod;
         private CardView cardView;
 
 
         public SpecialtyHolder(@NonNull View itemView) {
             super(itemView);
-            txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name);
-            text_status_specialty= itemView.findViewById(R.id.recycler_specialty_status);
-            image_specialty = itemView.findViewById(R.id.recycler_specialty_image);
+            txtNamePeriod = itemView.findViewById(R.id.txtNamePeriod);
+            txtEndDatePeriod= itemView.findViewById(R.id.txtEndDatePeriod);
+            imagePeriod = itemView.findViewById(R.id.imagePeriod);
             cardView = itemView.findViewById(R.id.recylcer_card_view);
 
 
