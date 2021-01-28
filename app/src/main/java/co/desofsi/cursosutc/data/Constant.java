@@ -3,7 +3,7 @@ package co.desofsi.cursosutc.data;
 public class Constant {
 
     //public static  final String URL = "https://www.clinicasourilatacunga.com/";
-    public static final String URL = "http://192.168.0.102:8000/";
+    public static final String URL = "http://192.168.100.8/";
     //public static final String URL = "http://192.168.0.100:8000/";
     public static final String URL_IMAGE = "http://192.168.0.102";
     public static final String HOME = URL + "api";
@@ -16,7 +16,7 @@ public class Constant {
 
     //NUEVAS RUTAS
     public static final String HOME_PERIODS = HOME + "/home-periods";
-    public static final String LEVELS = HOME + "/levels-by-student";
+    public static final String LEVELS = HOME + "/levels-by-student/";
     public static final String SUBJECTS = HOME + "/subjects-by-student/";
     public static final String COURSES = HOME + "/courses-by-subject/";
 

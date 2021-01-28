@@ -95,7 +95,7 @@ public class LevelsActivity extends AppCompatActivity {
    private void getLevels() {
         list_levels = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-        String url = Constant.LEVELS;
+        String url = Constant.LEVELS+Constant.PERIOD_ID;
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

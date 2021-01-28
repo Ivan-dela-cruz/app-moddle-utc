@@ -82,10 +82,10 @@ public class SpecialtyAdapter extends RecyclerView.Adapter<SpecialtyAdapter.Spec
 
         public SpecialtyHolder(@NonNull View itemView) {
             super(itemView);
-            txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name);
+            /*txt_name_specialty = itemView.findViewById(R.id.recycler_specialty_name);
             text_status_specialty= itemView.findViewById(R.id.recycler_specialty_status);
             image_specialty = itemView.findViewById(R.id.recycler_specialty_image);
-            cardView = itemView.findViewById(R.id.recylcer_card_view);
+            cardView = itemView.findViewById(R.id.recylcer_card_view);*/
 
 
         }
