@@ -19,6 +19,8 @@ public class Constant {
     public static final String LEVELS = HOME + "/levels-by-student/";
     public static final String SUBJECTS = HOME + "/subjects-by-student/";
     public static final String COURSES = HOME + "/courses-by-subject/";
+    public static final String TASKS = HOME + "/tasks-by-course/";
+    public static final String FILES = HOME + "/detail-task/";
 
 
     public static final String SPECIALTIES = HOME + "/app-specialties";
@@ -36,5 +38,16 @@ public class Constant {
     public static int LEVEL_ID = 0;
     public static int SUBJECT_ID = 0;
     public static int PERIOD_ID = 0;
+    public static int COURSE_ID = 0;
+    public static int TASK_ID = 0;
+    public static String STATUS_TASK = "Abierto";
+
+    //TASK DETAIL
+    public static String NAME_TASK = "";
+    public static String DESCRIPTION_TASK = "";
+    public static String START_DATE_TASK = "";
+    public static String END_DATE_TASK = "";
+    public static String END_TIME_TASK = "";
+    public static String STATUS_TASK_DT = "";
 
 }

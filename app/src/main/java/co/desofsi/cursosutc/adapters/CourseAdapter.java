@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import co.desofsi.cursosutc.R;
+import co.desofsi.cursosutc.activities.TasksActivity;
 import co.desofsi.cursosutc.activities.CoursesActivity;
 import co.desofsi.cursosutc.data.Constant;
 import co.desofsi.cursosutc.models.Course;
@@ -61,7 +61,10 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseHol
         holder.cardViewCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "teacher_id:  " + course.getTeacher_id(), Toast.LENGTH_SHORT).show();
+                Constant.COURSE_ID = course.getId();
+                Intent intent = new Intent((CoursesActivity) context, TasksActivity.class);
+                context.startActivity(intent);
+                //Toast.makeText(context, "course_id:  " + course.getId(), Toast.LENGTH_SHORT).show();
             }
         });
 
