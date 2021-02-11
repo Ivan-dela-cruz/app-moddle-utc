@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewTask"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:ignore="NamespaceTypo"
+    cardview:cardCornerRadius="12dp">
+
+    <RelativeLayout
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <ImageView
+            android:id="@+id/imageTask"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="7dp"
+            android:src="@color/colorLightGrey" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/imageTask"
+            android:orientation="vertical">
+
+           <RelativeLayout
+
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   android:maxLength="40"
+                   android:id="@+id/lblTitleTask"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentStart="true"
+                   android:layout_alignParentTop="true"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="0dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_marginBottom="5dp"
+                   android:layout_toStartOf="@+id/imageStatusTask"
+                   android:fontFamily="@font/lato_bold"
+                   android:text="@string/title"
+                   android:textColor="@color/colorBlack"
+                   android:textSize="14sp" />
+               <ImageView
+                   android:id="@+id/imageStatusTask"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:layout_alignParentEnd="true"
+                   android:layout_alignParentTop="true"
+                   android:layout_marginTop="0dp"
+                   android:layout_marginEnd="5dp"
+                   android:src="@drawable/ic_pending" />
+           </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_start_date" />
+
+                <TextView
+                    android:id="@+id/lblStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/start_date"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_end_date" />
+
+                <TextView
+                    android:id="@+id/lblEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/end_date"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/lblEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/end_time"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

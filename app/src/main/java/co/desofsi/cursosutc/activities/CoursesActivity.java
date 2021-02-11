@@ -64,7 +64,6 @@ public class CoursesActivity extends AppCompatActivity {
         }
         init();
 
-        //back to menu estates
         final Intent intent = new Intent(CoursesActivity.this, SubjectsActivity.class);
         btnBackCourses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +110,7 @@ public class CoursesActivity extends AppCompatActivity {
                                     JSONObject level_object = array.getJSONObject(i);
 
                                     Course course = new Course();
+                                    course.setId(level_object.getInt("id"));
                                     course.setTitle(level_object.getString("title"));
                                     course.setName(level_object.getString("name"));
                                     course.setLast_name(level_object.getString("last_name"));

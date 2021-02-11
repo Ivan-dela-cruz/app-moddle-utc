@@ -1,10 +1,11 @@
 package co.desofsi.cursosutc.models;
 
 public class Course {
-    String title,name,last_name,description,url_image;
-    int teacher_id,subject_id;
+    String title, name, last_name, description, url_image;
+    int id, teacher_id, subject_id;
 
-    public Course(String title, String name, String last_name, String description, String url_image, int teacher_id, int subject_id) {
+    public Course(int id, String title, String name, String last_name, String description, String url_image, int teacher_id, int subject_id) {
+        this.id = id;
         this.title = title;
         this.name = name;
         this.last_name = last_name;
@@ -15,6 +16,14 @@ public class Course {
     }
 
     public Course() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
