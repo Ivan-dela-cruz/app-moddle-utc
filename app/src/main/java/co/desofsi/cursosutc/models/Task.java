@@ -1,13 +1,14 @@
 package co.desofsi.cursosutc.models;
 
 public class Task {
-    int id, course_id, files;
+    int id, course_id, files, deliveries;
     String name, description, start_date, end_date, url_file, end_time, status;
 
-    public Task(int id, int course_id, int files, String name, String description, String start_date, String end_date, String url_file, String end_time, String status) {
+    public Task(int id, int course_id, int files, int deliveries, String name, String description, String start_date, String end_date, String url_file, String end_time, String status) {
         this.id = id;
         this.course_id = course_id;
         this.files = files;
+        this.deliveries = deliveries;
         this.name = name;
         this.description = description;
         this.start_date = start_date;
@@ -98,5 +99,13 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(int deliveries) {
+        this.deliveries = deliveries;
     }
 }

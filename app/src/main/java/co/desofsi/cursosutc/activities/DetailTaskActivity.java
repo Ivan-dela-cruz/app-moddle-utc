@@ -1,22 +1,33 @@
 package co.desofsi.cursosutc.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,24 +38,37 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dd.processbutton.iml.ActionProcessButton;
+import com.dd.processbutton.iml.SubmitProcessButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.adapters.FileAdapter;
 import co.desofsi.cursosutc.data.Constant;
+import co.desofsi.cursosutc.data.FilePath;
+import co.desofsi.cursosutc.data.ProgressGenerator;
 import co.desofsi.cursosutc.models.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
-public class DetailTaskActivity extends AppCompatActivity {
+public class DetailTaskActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener, View.OnClickListener {
     private static final int PERMISSIONS_STORAGE_CODE = 1000;
-    TextView lblTitleDT, lblDescriptionDT, lblStartDateDT, lblEndDateDT, lblEndTimeDT, lblStatusDT;
+    private static final int ALL_FILE_REQUEST = 102;
+    TextView lblTitleDT, lblDescriptionDT, lblStartDateDT, lblEndDateDT, lblEndTimeDT, lblStatusDT, lblSelectedFile;
     CircleImageView btnBackDetailTask;
     RecyclerView recyclerView;
     private ArrayList<File> list_files;
@@ -52,7 +76,11 @@ public class DetailTaskActivity extends AppCompatActivity {
     JSONArray array;
     private FileAdapter fileAdapter;
     private SwipeRefreshLayout refreshLayout;
-
+    ActionProcessButton btnSendTask;
+    ProgressGenerator progressGenerator;
+    Button btnSelectedFile;
+    public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
+    String all_file_path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,24 +99,18 @@ public class DetailTaskActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                String [] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
                 requestPermissions(permissions, PERMISSIONS_STORAGE_CODE);
             } else {
                 //downloading
             }
-        } else {
-            // not permissions
-        }
-
+        } else {/* not permissions*/}
         init();
-        final Intent intent = new Intent(DetailTaskActivity.this, TasksActivity.class);
-        btnBackDetailTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+    }
+
+    @Override
+    public void onComplete() {
+        //Toast.makeText(this, R.string.Loading_Complete, Toast.LENGTH_LONG).show();
     }
 
     public void init() {
@@ -100,15 +122,44 @@ public class DetailTaskActivity extends AppCompatActivity {
         lblEndDateDT = (TextView) findViewById(R.id.lblEndDateDT);
         lblEndTimeDT = (TextView) findViewById(R.id.lblEndTimeDT);
         lblStatusDT = (TextView) findViewById(R.id.lblStatusDT);
+        lblSelectedFile = (TextView) findViewById(R.id.lblSelectedFile);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerFilesDT);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeDetailTask);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DetailTaskActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        btnSendTask = (ActionProcessButton) findViewById(R.id.btnSendTask);
+        btnSelectedFile =(Button) findViewById(R.id.btnSelectedFile);
+
         getDetailTask();
 
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDetailTask();
+            }
+        });
+
+        setOnClickListeners();
+
+        progressGenerator = new ProgressGenerator(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.getBoolean(EXTRAS_ENDLESS_MODE)) {
+            btnSendTask.setMode(ActionProcessButton.Mode.ENDLESS);
+        } else {
+            btnSendTask.setMode(ActionProcessButton.Mode.PROGRESS);
+        }
+
     }
+
+    void setOnClickListeners() {
+        btnSendTask.setOnClickListener(this);
+        btnBackDetailTask.setOnClickListener(this);
+        btnSelectedFile.setOnClickListener(this);
+    }
+
 
     private void getDetailTask() {
         lblTitleDT.setText(Constant.NAME_TASK);
@@ -117,11 +168,12 @@ public class DetailTaskActivity extends AppCompatActivity {
         lblEndDateDT.setText(Constant.END_DATE_TASK);
         lblEndTimeDT.setText(Constant.END_TIME_TASK);
         lblStatusDT.setText(Constant.STATUS_TASK_DT);
-         list_files = new ArrayList<>();
+        lblStatusDT.setTextColor(Color.parseColor("#" + statusColor(Constant.STATUS_TASK_DT)));
+
+        list_files = new ArrayList<>();
         refreshLayout.setRefreshing(true);
         String url = Constant.FILES + Constant.TASK_ID;
-
-        System.out.println(url);
+        //  System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -140,12 +192,10 @@ public class DetailTaskActivity extends AppCompatActivity {
                                     file.setName(task_object.getString("name"));
                                     file.setFilename(task_object.getString("filename"));
                                     file.setUrl_file(task_object.getString("url_file"));
-
                                     list_files.add(file);
                                 }
                                 fileAdapter = new FileAdapter(DetailTaskActivity.this, list_files);
                                 recyclerView.setAdapter(fileAdapter);
-
                             }
 
                         } catch (Exception e) {
@@ -178,17 +228,137 @@ public class DetailTaskActivity extends AppCompatActivity {
 
     }
 
+    public String statusColor(String status) {
+        String color = "";
+        if (status.equals("Abierto")) {
+            color = "64B5F6";
+        } else if (status.equals("Cancelado")) {
+            color = "E57373";
+        } else if (status.equals("Atrasado")) {
+            color = "E57373";
+        } else if (status.equals("Finalizado")) {
+            color = "81C784";
+        }
+        return color;
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case PERMISSIONS_STORAGE_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //init download
-                }else{
+                } else {
                     Toast.makeText(this, "¡Sin permisos!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnBackDetailTask:
+                final Intent intent = new Intent(DetailTaskActivity.this, TasksActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.btnSelectedFile:
+                filePicker();
+                break;
+            case R.id.btnSendTask:
+                progressGenerator.start(btnSendTask);
+                btnSendTask.setEnabled(false);
+                UploadTask uploadTask = new UploadTask();
+                uploadTask.execute(new String[]{all_file_path});
+                break;
+        }
+    }
+
+    private void filePicker(){
+        Intent intent = new Intent();
+        intent.setType("*/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Seleccione su tarea para subir"), ALL_FILE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == ALL_FILE_REQUEST) {
+                if (data == null) {
+                    return;
+                }
+                Uri uri = data.getData();
+                String paths = FilePath.getFilePath(DetailTaskActivity.this, uri);
+                Log.d("File Path : ", "" + paths);
+                if (paths != null) {
+                    lblSelectedFile.setText("" + new java.io.File(paths).getName());
+                }
+                all_file_path = paths;
+            }
+        }
+    }
+
+    public class UploadTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s!=null){
+                Toast.makeText(DetailTaskActivity.this, "File Uploaded", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(DetailTaskActivity.this, "File Upload Failed", Toast.LENGTH_SHORT).show();
+            }
+            //   progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            java.io.File file1 = new java.io.File(strings[0]);
+            String url = Constant.DELIVERY_TASK;;
+            System.out.println(url);
+            String token = sharedPreferences.getString("token", "");
+          //  int id = sharedPreferences.getInt("id",0);
+
+            try {
+                RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("files1", file1.getName(), RequestBody.create(MediaType.parse("*/*"), file1))
+                        .addFormDataPart("description", "descripcioon")
+                        .addFormDataPart("course_id", String.valueOf(Constant.COURSE_ID))
+                        .addFormDataPart("task_id", String.valueOf(Constant.TASK_ID))
+                        .build();
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(url)
+                        .addHeader("Authorization", "Bearer " + token)
+                        .post(requestBody)
+                        .build();
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                //now progressbar not showing properly let's fixed it
+                okhttp3.Response response = okHttpClient.newCall(request).execute();
+                if (response != null && response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return null;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
 }
