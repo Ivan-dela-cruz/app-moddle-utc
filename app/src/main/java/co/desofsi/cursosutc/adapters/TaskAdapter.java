@@ -54,32 +54,32 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
         final Task task = list_task.get(position);
 
-       int[] images = {
-               R.drawable.bg1,
-               R.drawable.bg2,
-               R.drawable.bg3,
-               R.drawable.bg4,
-               R.drawable.bg5,
-               R.drawable.bg6,
-               R.drawable.bg7,
-               R.drawable.bg8,
-               R.drawable.bg9,
-               R.drawable.bg10,
-               R.drawable.bg11,
-               R.drawable.bg12,
-               R.drawable.bg13,
-               R.drawable.bg14,
-               R.drawable.bg15,
-               R.drawable.bg16,
-               R.drawable.bg17,
-               R.drawable.bg18,
-               R.drawable.bg19,
+        int[] images = {
+                R.drawable.bg1,
+                R.drawable.bg2,
+                R.drawable.bg3,
+                R.drawable.bg4,
+                R.drawable.bg5,
+                R.drawable.bg6,
+                R.drawable.bg7,
+                R.drawable.bg8,
+                R.drawable.bg9,
+                R.drawable.bg10,
+                R.drawable.bg11,
+                R.drawable.bg12,
+                R.drawable.bg13,
+                R.drawable.bg14,
+                R.drawable.bg15,
+                R.drawable.bg16,
+                R.drawable.bg17,
+                R.drawable.bg18,
+                R.drawable.bg19,
         };
 
         Random rand = new Random();
 
-         holder.imageTask.setImageResource(images[rand.nextInt(images.length)]);
-         holder.imageStatusTask.setImageResource(holder.statusImage(task.getStatus()));
+        holder.imageTask.setImageResource(images[rand.nextInt(images.length)]);
+        holder.imageStatusTask.setImageResource(holder.statusImage(task.getStatus()));
         holder.lblTitleTask.setText(task.getName());
         holder.lblStartDate.setText(task.getStart_date());
         holder.lblEndDate.setText(task.getEnd_date());
@@ -102,7 +102,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
                 Intent intent = new Intent((TasksActivity) context, DetailTaskActivity.class);
                 context.startActivity(intent);
-               // Toast.makeText(context, "task_id:  " + task.getId(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "task_id:  " + task.getId(), Toast.LENGTH_SHORT).show();
             }
         });
         holder.cardViewTask.setOnLongClickListener(new View.OnLongClickListener() {
@@ -120,7 +120,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
                 holder.dialogStatusTask.setText(task.getStatus());
                 holder.dialogFilesTask.setText(String.valueOf(task.getFiles()));
 
-              //  Toast.makeText(context, "LONG task_id:  " + task.getId(), Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(context, "LONG task_id:  " + task.getId(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -135,12 +135,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
     class TaskHolder extends RecyclerView.ViewHolder {
 
-        private TextView lblTitleTask,lblStartDate,lblEndDate,lblEndTime;
+        private TextView lblTitleTask, lblStartDate, lblEndDate, lblEndTime;
         private ImageView imageTask, imageStatusTask;
         private CardView cardViewTask;
 
         //dialog info task
-        TextView dialogNameTask, dialogFilesTask,dialogStartDateTask, dialogEndDateTask, dialogTimeTask, dialogStatusTask;
+        TextView dialogNameTask, dialogFilesTask, dialogStartDateTask, dialogEndDateTask, dialogTimeTask, dialogStatusTask;
         ImageButton dialogCloseBtnTask;
 
 
@@ -169,7 +169,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             return color;
         }
 
-        public int statusImage(String status){
+        public int statusImage(String status) {
             int image = 0;
             if (status.equals("Abierto")) {
                 image = R.drawable.ic_pending;
@@ -191,7 +191,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             initDialog(view);
             final AlertDialog dialog = builder.create();
             dialog.show();
-          //  dialog.setCanceledOnTouchOutside(false);
+            //  dialog.setCanceledOnTouchOutside(false);
             dialogCloseBtnTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

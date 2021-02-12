@@ -200,6 +200,7 @@ public class TasksActivity extends AppCompatActivity implements View.OnClickList
                                     task.setEnd_time(task_object.getString("end_time"));
                                     task.setStatus(task_object.getString("status"));
                                     task.setCourse_id(task_object.getInt("course_id"));
+                                    task.setDeliveries(task_object.getInt("deliveries"));
                                     task.setFiles(task_object.getInt("files"));
                                     list_tasks.add(task);
                                 }

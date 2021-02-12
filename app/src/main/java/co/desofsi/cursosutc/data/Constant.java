@@ -33,6 +33,7 @@ public class Constant {
     public static final String TREATMENT_DETAIL = HOME + "/app-get-detail-treatment";
     public static final String MY_PAYMENTS = HOME + "/app-get-my-payments";
     public static final String PAYMENT_DETAIL = HOME + "/app-get-detail-payment";
+    public static final String DELIVERY_TASK = HOME + "/delivery-task";
 
 
     public static int LEVEL_ID = 0;
@@ -40,6 +41,7 @@ public class Constant {
     public static int PERIOD_ID = 0;
     public static int COURSE_ID = 0;
     public static int TASK_ID = 0;
+    public static int STUDENT_ID = 0;
     public static String STATUS_TASK = "Abierto";
 
     //TASK DETAIL

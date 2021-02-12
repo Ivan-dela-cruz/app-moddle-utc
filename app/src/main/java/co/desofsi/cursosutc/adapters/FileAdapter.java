@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.activities.DetailTaskActivity;
@@ -48,6 +50,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileHolder> {
     public void onBindViewHolder(@NonNull final FileAdapter.FileHolder holder, final int position) {
 
         final File file = list_files.get(position);
+        holder.setFileIcon(Constant.URL + file.getUrl_file());
         holder.lblFileName.setText(file.getName());
         holder.cardViewFile.setRadius(30);
 
@@ -72,6 +75,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileHolder> {
 
         private TextView lblFileName;
         private CardView cardViewFile;
+        ImageView iconFiles;
 
         TextView dialogNameTask, dialogFilesTask, dialogStartDateTask, dialogEndDateTask, dialogTimeTask, dialogStatusTask;
         ImageButton dialogCloseBtnTask;
@@ -80,6 +84,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileHolder> {
             super(itemView);
             cardViewFile = itemView.findViewById(R.id.cardViewFile);
             lblFileName = itemView.findViewById(R.id.lblFileName);
+            iconFiles = itemView.findViewById(R.id.iconFiles);
         }
 
         public void startDownloading(String url, String filename) {
@@ -89,12 +94,34 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileHolder> {
             request.setDescription("Descargando...");
             request.allowScanningByMediaScanner();
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, ""+System.currentTimeMillis());
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "" + System.currentTimeMillis());
 
             DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
             manager.enqueue(request);
+        }
 
+        private void setFileIcon(String url) {
+            StringBuilder sBuilder = new StringBuilder(url);
+            String reverseURL = sBuilder.reverse().toString();
+            String[] splitURL = reverseURL.split(Pattern.quote("."));
+            StringBuilder reverseEXT = new StringBuilder(splitURL[0]);
+            String ext = reverseEXT.reverse().toString();
 
+            System.out.println("EXT: " + ext);
+
+            if (ext.equals("docx") | ext.equals("doc")) {
+                iconFiles.setImageResource(R.drawable.ic_doc);
+            } else if (ext.equals("pptx") | ext.equals("ppt")) {
+                iconFiles.setImageResource(R.drawable.ic_ppt);
+            } else if (ext.equals("csv") | ext.equals("xlsx") | ext.equals("xls")) {
+                iconFiles.setImageResource(R.drawable.ic_xls);
+            } else if (ext.equals("png") | ext.equals("jpg") | ext.equals("jpeg")) {
+                iconFiles.setImageResource(R.drawable.ic_pictures);
+            } else if (ext.equals("pdf")) {
+                iconFiles.setImageResource(R.drawable.ic_pdf);
+            } else {
+                iconFiles.setImageResource(R.drawable.ic_clip);
+            }
         }
 
 

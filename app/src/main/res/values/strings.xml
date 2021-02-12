@@ -93,7 +93,17 @@
     <string name="end_date">F. Fin</string>
     <string name="end_time">Hora</string>
     <string name="status">Estado</string>
-    <string name="files">Archivos</string>
+    <string name="files">Archivos:</string>
     <string name="info">Información de la Tarea</string>
+    <string name="deliver">Entrega:</string>
+    <string name="selectedFile">Seleccionar Archivo</string>
+    <string name="sendTask">Enviar Tarea</string>
+    <string name="nameFile">Nombre de mi archivo seleccionado.pdf</string>
+
+    <string name="Loading_Complete">Loading Complete, button is disabled</string>
+
+    <string name="success">Tarea Enviada</string>
+    <string name="error">Error al Enviar</string>
+    <string name="loading">Enviando...</string>
 
 </resources>
