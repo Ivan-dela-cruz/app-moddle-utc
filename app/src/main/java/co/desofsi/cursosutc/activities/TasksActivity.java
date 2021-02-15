@@ -71,11 +71,18 @@ public class TasksActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
         init();
-        final Intent intent = new Intent(TasksActivity.this, CoursesActivity.class);
+
         btnBackTasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                final Intent intent;
+                if (Constant.SUBJECT_ID == 0) {
+                    intent = new Intent(TasksActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                } else {
+                    intent = new Intent(TasksActivity.this, CoursesActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                }
                 startActivity(intent);
             }
         });

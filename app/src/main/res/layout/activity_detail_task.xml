@@ -44,24 +44,21 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeDetailTask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="38dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -197,161 +194,248 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeDetailTask"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardElevation="5dp">
-
-                    <TextView
-                        android:id="@+id/lblTitleDT"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="@string/detail_task"
-                        android:textColor="@color/md_black_1000"
-                        android:textSize="15sp" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+                    <ScrollView
+                        android:fillViewport="true"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/detail_task_"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/lblDescriptionDT"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/detail_task"
-                            android:textColor="@color/md_black_1000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/files"
-                            android:textSize="15sp" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerFilesDT"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/deliver"
-                            android:textSize="15sp" />
-
+                        android:layout_height="wrap_content">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="5sp">
+                            android:orientation="vertical">
 
-                            <Button
-                                android:id="@+id/btnSelectedFile"
-                                android:layout_width="0dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/btn_outline"
-                                android:text="@string/selectedFile"
-                                android:textAllCaps="false"
-                                android:textColor="@color/md_blue_300"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:paddingLeft="10dp"
-                                android:id="@+id/lblSelectedFile"
-                                android:layout_width="0dp"
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1"
-                                android:text="@string/nameFile" />
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:cardElevation="5dp">
+
+                                <TextView
+                                    android:id="@+id/lblTitleDT"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:text="@string/detail_task"
+                                    android:textColor="@color/md_black_1000"
+                                    android:textSize="15sp" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                app:cardElevation="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:text="@string/detail_task_"
+                                        android:textSize="15sp" />
+
+                                    <TextView
+                                        android:id="@+id/lblDescriptionDT"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:text="@string/detail_task"
+                                        android:textColor="@color/md_black_1000"
+                                        android:textSize="15sp" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                app:cardElevation="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:text="@string/files"
+                                        android:textSize="15sp" />
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerFilesDT"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginBottom="10dp" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                app:cardElevation="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:text="@string/deliver"
+                                        android:textSize="15sp" />
+                                    <View
+                                        android:background="@color/md_grey_300"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"/>
+
+                                    <LinearLayout
+                                        android:id="@+id/layoutDelivery"
+                                        android:orientation="vertical"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="5dp"
+                                            android:text="Archivo:"
+                                            android:textSize="13sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:padding="5dp">
+
+                                            <Button
+                                                android:id="@+id/btnSelectedFile"
+                                                android:layout_width="0dp"
+                                                android:layout_height="30dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="5dp"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/btn_outline"
+                                                android:text="@string/selectedFile"
+                                                android:textAllCaps="false"
+                                                android:textColor="@color/md_blue_300"
+                                                android:textSize="13sp" />
+
+                                            <TextView
+                                                android:id="@+id/lblSelectedFile"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="10dp"
+                                                android:text=""
+                                                android:textColor="@color/md_black_1000"
+                                                android:textSize="13sp" />
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="5dp"
+                                            android:text="Descripción:"
+                                            android:textSize="13sp" />
+
+                                        <EditText
+                                            android:layout_marginTop="10dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:id="@+id/textArea_information"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/btn_outline"
+                                            android:gravity="top|left"
+                                            android:inputType="textMultiLine"
+                                            android:lines="4"
+                                            android:overScrollMode="always"
+                                            android:scrollbarStyle="insideInset"
+                                            android:scrollbars="vertical"
+                                            android:scrollHorizontally="false"
+                                            android:paddingStart="5dp"
+                                            android:paddingEnd="5dp"
+                                            android:paddingTop="5dp"
+                                            android:textSize="14sp"/>
+
+                                        <com.dd.processbutton.iml.ActionProcessButton
+                                            android:id="@+id/btnSendTask"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:layout_marginStart="15dp"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginBottom="15dp"
+                                            android:text="@string/sendTask"
+                                            android:textAllCaps="false"
+                                            android:textColor="@android:color/white"
+                                            android:textSize="14sp"
+                                            app:pb_cornerRadius="5dp"
+                                            custom:pb_colorComplete="@color/md_green_300"
+                                            custom:pb_colorError="@color/md_red_300"
+                                            custom:pb_colorNormal="@color/md_blue_300"
+                                            custom:pb_colorPressed="@color/md_blue_300"
+                                            custom:pb_colorProgress="@color/md_blue_500"
+                                            custom:pb_textComplete="@string/success"
+                                            custom:pb_textError="@string/error"
+                                            custom:pb_textProgress="@string/loading" />
+                                    </LinearLayout>
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerFilesDTDELIVERY"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginBottom="10dp" />
+
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="350dp">
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-                        <com.dd.processbutton.iml.ActionProcessButton
-                            android:id="@+id/btnSendTask"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginBottom="15dp"
-                            android:layout_width="match_parent"
-                            android:text="@string/sendTask"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            app:pb_cornerRadius="5dp"
-                            custom:pb_colorComplete="@color/md_green_300"
-                            custom:pb_colorNormal="@color/md_blue_300"
-                            custom:pb_colorPressed="@color/md_blue_300"
-                            custom:pb_colorProgress="@color/md_blue_500"
-                            custom:pb_colorError="@color/md_red_300"
-                            custom:pb_textComplete="@string/success"
-                            custom:pb_textProgress="@string/loading"
-                            custom:pb_textError="@string/error"
-                            android:textAllCaps="false"/>
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    </ScrollView>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             </LinearLayout>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     </LinearLayout>
 

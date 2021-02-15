@@ -62,7 +62,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseHol
             @Override
             public void onClick(View v) {
                 Constant.COURSE_ID = course.getId();
-                Intent intent = new Intent((CoursesActivity) context, TasksActivity.class);
+                Intent intent = new Intent(context, TasksActivity.class);
                 context.startActivity(intent);
                 //Toast.makeText(context, "course_id:  " + course.getId(), Toast.LENGTH_SHORT).show();
             }

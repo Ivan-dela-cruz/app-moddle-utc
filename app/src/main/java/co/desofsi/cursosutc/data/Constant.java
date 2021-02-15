@@ -4,7 +4,7 @@ public class Constant {
 
     //public static  final String URL = "https://www.clinicasourilatacunga.com/";
     public static final String URL = "http://192.168.100.8/";
-    //public static final String URL = "http://192.168.0.100:8000/";
+    //public static final String URL = "http://54.91.31.233/";
     public static final String URL_IMAGE = "http://192.168.0.102";
     public static final String HOME = URL + "api";
     public static final String LOGIN = HOME + "/login";
@@ -19,7 +19,9 @@ public class Constant {
     public static final String LEVELS = HOME + "/levels-by-student/";
     public static final String SUBJECTS = HOME + "/subjects-by-student/";
     public static final String COURSES = HOME + "/courses-by-subject/";
+    public static final String MY_COURSES = HOME + "/my-courses";
     public static final String TASKS = HOME + "/tasks-by-course/";
+    public static final String TASKS_TODAY = HOME + "/task-for-today";
     public static final String FILES = HOME + "/detail-task/";
 
 
@@ -34,6 +36,7 @@ public class Constant {
     public static final String MY_PAYMENTS = HOME + "/app-get-my-payments";
     public static final String PAYMENT_DETAIL = HOME + "/app-get-detail-payment";
     public static final String DELIVERY_TASK = HOME + "/delivery-task";
+    public static final String EDUCATION = HOME + "/education";
 
 
     public static int LEVEL_ID = 0;
@@ -42,6 +45,7 @@ public class Constant {
     public static int COURSE_ID = 0;
     public static int TASK_ID = 0;
     public static int STUDENT_ID = 0;
+    public static int DELIVERY_COUNT = 0;
     public static String STATUS_TASK = "Abierto";
 
     //TASK DETAIL

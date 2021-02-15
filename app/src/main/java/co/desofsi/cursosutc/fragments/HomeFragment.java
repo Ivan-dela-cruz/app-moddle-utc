@@ -40,24 +40,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import co.desofsi.cursosutc.R;
+import co.desofsi.cursosutc.activities.TasksActivity;
 import co.desofsi.cursosutc.adapters.MyAppointmentAdapter;
 import co.desofsi.cursosutc.adapters.PeriodAdapter;
 import co.desofsi.cursosutc.adapters.SpecialtyAdapter;
 import co.desofsi.cursosutc.activities.HomeActivity;
+import co.desofsi.cursosutc.adapters.TaskAdapter;
 import co.desofsi.cursosutc.data.Constant;
 import co.desofsi.cursosutc.init.AuthActivity;
 import co.desofsi.cursosutc.init.UserProfileActivity;
 import co.desofsi.cursosutc.models.AppointmentDescription;
 import co.desofsi.cursosutc.models.Period;
 import co.desofsi.cursosutc.models.Specialty;
+import co.desofsi.cursosutc.models.Task;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
     private View view;
-    private RecyclerView recyclerView;
-    private ArrayList<Period> lis_periods;
+    private RecyclerView recyclerView,recyclerViewTaskToday;
+    private ArrayList<Period> list_periods;
+    private ArrayList<Task> list_tasks;
     private SwipeRefreshLayout refreshLayout;
     private PeriodAdapter periodAdapter;
+    private TaskAdapter taskAdapter;
     private MaterialToolbar toolbar;
     private SharedPreferences sharedPreferences;
 
@@ -67,10 +72,10 @@ public class HomeFragment extends Fragment {
     private CircleImageView image_user;
     private ImageButton btn_close;
     //MY APPOINTMENTS
-    private ArrayList<AppointmentDescription> list_appointments_today;
-    private RecyclerView my_appointments_recycler;
+  //  private ArrayList<AppointmentDescription> list_appointments_today;
+ //   private RecyclerView my_appointments_recycler;
     ///json array
-    JSONArray array, array_my_appointments;
+    JSONArray array, array_tasks;
 
     private RelativeLayout empty;
     private ProgressDialog dialog;
@@ -91,11 +96,16 @@ public class HomeFragment extends Fragment {
         dialog.setCancelable(false);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         recyclerView = view.findViewById(R.id.home_fragment_recycler);
+        recyclerViewTaskToday =view.findViewById(R.id.recyclerViewTaskToday);
         recyclerView.setHasFixedSize(true);
+        recyclerViewTaskToday.setHasFixedSize(true);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager verticalLayoutManagaer = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
 
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
+        recyclerViewTaskToday.setLayoutManager(verticalLayoutManagaer);
+
         refreshLayout = view.findViewById(R.id.home_fragment_swipe);
         toolbar = view.findViewById(R.id.home_fragment_toolbar);
         ((HomeActivity) getActivity()).setSupportActionBar(toolbar);
@@ -106,10 +116,10 @@ public class HomeFragment extends Fragment {
         name_user = view.findViewById(R.id.fragment_home_text_user_name);
         image_user = view.findViewById(R.id.fragment_home_circle_view_user);
         ///RECYCLER MY_APPOINTMEST INIT
-        my_appointments_recycler = view.findViewById(R.id.home_fragment_recycler_my_appointments);
-        my_appointments_recycler.setHasFixedSize(true);
-        LinearLayoutManager LayoutManagaer_my_appointments = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        my_appointments_recycler.setLayoutManager(LayoutManagaer_my_appointments);
+      //  my_appointments_recycler = view.findViewById(R.id.home_fragment_recycler_my_appointments);
+       // my_appointments_recycler.setHasFixedSize(true);
+        //LinearLayoutManager LayoutManagaer_my_appointments = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+       // my_appointments_recycler.setLayoutManager(LayoutManagaer_my_appointments);
 
         String name = sharedPreferences.getString("name", "");
         String url_image_user = sharedPreferences.getString("url_image", "");
@@ -117,12 +127,12 @@ public class HomeFragment extends Fragment {
         Picasso.get().load(Constant.URL + url_image_user).into(image_user);
 
         getPeriods();
-       // getMyAPointments();
+        getTasks();
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 getPeriods();
-                //getMyAPointments();
+               getTasks();
 
             }
         });
@@ -201,7 +211,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getPeriods() {
-        lis_periods = new ArrayList<>();
+        list_periods = new ArrayList<>();
         refreshLayout.setRefreshing(true);
       //  System.out.println(Constant.HOME_PERIODS);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.HOME_PERIODS,
@@ -223,10 +233,10 @@ public class HomeFragment extends Fragment {
                                     period.setStatus(period_object.getString("status"));
                                     period.setUrl_image(period_object.getString("url_image"));
 
-                                    lis_periods.add(period);
+                                    list_periods.add(period);
 
                                 }
-                                periodAdapter = new PeriodAdapter(getContext(), lis_periods);
+                                periodAdapter = new PeriodAdapter(getContext(), list_periods);
                                 recyclerView.setAdapter(periodAdapter);
 
                             }
@@ -261,53 +271,43 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getMyAPointments() {
-        list_appointments_today = new ArrayList<>();
+    private void getTasks() {
+        list_tasks = new ArrayList<>();
         refreshLayout.setRefreshing(true);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.MY_APPOINTMENTS,
+        String url = Constant.TASKS_TODAY;
+        System.out.println(url);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject object = new JSONObject(response);
                             if (object.getBoolean("success")) {
-                                array_my_appointments = new JSONArray(object.getString("appointments"));
+                                array = new JSONArray(object.getString("tasks"));
 
-                                for (int i = 0; i < array_my_appointments.length(); i++) {
-                                    JSONObject specialty_object = array_my_appointments.getJSONObject(i);
-                                    AppointmentDescription appointmentDescription = new AppointmentDescription();
-                                    appointmentDescription.setId(specialty_object.getInt("id"));
-                                    appointmentDescription.setColor(specialty_object.getString("color"));
-                                    appointmentDescription.setDate(specialty_object.getString("date"));
-                                    appointmentDescription.setObservation(specialty_object.getString("observation"));
-                                    appointmentDescription.setStart(specialty_object.getString("start"));
-                                    appointmentDescription.setStatus(specialty_object.getString("status"));
-                                    appointmentDescription.setEnd(specialty_object.getString("end"));
-                                    appointmentDescription.setReason(specialty_object.getString("reason"));
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject task_object = array.getJSONObject(i);
 
-                                    appointmentDescription.setStatus(specialty_object.getString("status"));
-                                    appointmentDescription.setSpecialty(specialty_object.getString("specialty"));
-                                    appointmentDescription.setName_p(specialty_object.getString("name_p"));
-                                    appointmentDescription.setLast_name_p(specialty_object.getString("last_name_p"));
-                                    appointmentDescription.setCi(specialty_object.getString("ci"));
-                                    appointmentDescription.setName_d(specialty_object.getString("name_d"));
-                                    appointmentDescription.setLast_name_d(specialty_object.getString("last_name_d"));
-                                    appointmentDescription.setUrl_image_d(specialty_object.getString("url_image"));
-
-                                    //  System.out.println("objeto   : =>      " + appointmentDescription.getSpecialty() + " , " + appointmentDescription.getName_d() + "  , " + appointmentDescription.getObservation());
-                                    list_appointments_today.add(appointmentDescription);
-
+                                    Task task = new Task();
+                                    task.setId(task_object.getInt("id"));
+                                    task.setName(task_object.getString("name"));
+                                    task.setDescription(task_object.getString("description"));
+                                    task.setStart_date(task_object.getString("start_date"));
+                                    task.setEnd_date(task_object.getString("end_date"));
+                                    task.setUrl_file(task_object.getString("url_file"));
+                                    task.setEnd_time(task_object.getString("end_time"));
+                                    task.setStatus(task_object.getString("status"));
+                                    task.setCourse_id(task_object.getInt("course_id"));
+                                    task.setDeliveries(task_object.getInt("deliveries"));
+                                    task.setFiles(task_object.getInt("files"));
+                                    list_tasks.add(task);
                                 }
-                                if (list_appointments_today.size() == 0) {
-                                    empty.setVisibility(View.VISIBLE);
-                                } else {
-                                    empty.setVisibility(View.GONE);
-                                }
-                                MyAppointmentAdapter myAppointmentAdapter = new MyAppointmentAdapter(getContext(), list_appointments_today);
-                                my_appointments_recycler.setAdapter(myAppointmentAdapter);
-
+                                taskAdapter = new TaskAdapter(getContext(), list_tasks);
+                                recyclerViewTaskToday.setAdapter(taskAdapter);
 
                             }
+
                         } catch (Exception e) {
 
                             e.printStackTrace();
@@ -319,9 +319,9 @@ public class HomeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
-                        System.out.println(error);
                         refreshLayout.setRefreshing(false);
+                        System.out.println(error);
+
                     }
                 }) {
             @Override
