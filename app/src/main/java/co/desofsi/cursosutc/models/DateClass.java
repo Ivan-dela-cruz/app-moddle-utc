@@ -64,7 +64,7 @@ public class DateClass {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         try {
             Date date = simpleDateFormat.parse(date_select);
-            SimpleDateFormat format = new SimpleDateFormat("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+            SimpleDateFormat format = new SimpleDateFormat("EEEE d 'de' MMMM 'del' yyyy", new Locale("es", "ES"));
             String date_for_human = format.format(date);
             date_result = date_for_human;
             return date_result;

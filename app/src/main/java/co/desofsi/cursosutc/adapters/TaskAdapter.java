@@ -99,10 +99,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
                 Constant.END_DATE_TASK = task.getEnd_date();
                 Constant.END_TIME_TASK = task.getEnd_time();
                 Constant.STATUS_TASK_DT = task.getStatus();
+                Constant.DELIVERY_COUNT = task.getDeliveries();
 
-                Intent intent = new Intent((TasksActivity) context, DetailTaskActivity.class);
+                Intent intent = new Intent( context, DetailTaskActivity.class);
                 context.startActivity(intent);
-                // Toast.makeText(context, "task_id:  " + task.getId(), Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(context, "Delivery:  " + Constant.DELIVERY_COUNT, Toast.LENGTH_SHORT).show();
             }
         });
         holder.cardViewTask.setOnLongClickListener(new View.OnLongClickListener() {

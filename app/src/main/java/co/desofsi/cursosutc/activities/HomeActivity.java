@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import co.desofsi.cursosutc.R;
 import co.desofsi.cursosutc.fragments.AccountFragment;
 import co.desofsi.cursosutc.fragments.CalendarFragment;
+import co.desofsi.cursosutc.fragments.EducationFragment;
 import co.desofsi.cursosutc.fragments.HomeFragment;
+import co.desofsi.cursosutc.fragments.MyCoursesFragment;
 import co.desofsi.cursosutc.fragments.NotificationFragment;
 import co.desofsi.cursosutc.fragments.TreatmentFragment;
 
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case ID_EXPLORE:
                         name = "EXPLORE";
-                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new CalendarFragment(),CalendarFragment.class.getSimpleName()).commit();
+                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new MyCoursesFragment(), MyCoursesFragment.class.getSimpleName()).commit();
 
                         break;
                     case ID_MESSAGE:
@@ -91,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case ID_NOTIFICATION:
                         name = "NOTIFICATION";
-                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new NotificationFragment(),NotificationFragment.class.getSimpleName()).commit();
+                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new EducationFragment(),EducationFragment.class.getSimpleName()).commit();
 
                         break;
                     case ID_ACCOUNT:
