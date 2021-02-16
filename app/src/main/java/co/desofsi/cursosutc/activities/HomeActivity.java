@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_home_black_24dp));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_calendar));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_online_course__1_));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_check_file));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_baseline_payment_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_account_circle_black_24dp));
