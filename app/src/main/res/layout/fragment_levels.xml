@@ -6,9 +6,55 @@
     android:background="@drawable/bg_abstract"
     android:orientation="vertical">
 
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/my_levels_fragment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:elevation="1dp"
+        android:theme="@style/AppTheme.BottomAppbar"
+        android:visibility="visible"
+        app:title=" ">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:src="@drawable/logo_large" />
+
+            <TextView
+                android:visibility="gone"
+                android:gravity="center|end"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Historial de citas"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/lato_black"
+                />
+        </RelativeLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/my_levels_fragment_toolbar"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:fillViewport="true">
@@ -16,57 +62,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/home_fragment_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:elevation="1dp"
-                android:theme="@style/AppTheme.BottomAppbar"
-                android:visibility="visible"
-                app:title=" ">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="vertical">
-
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:clickable="true"
-                        android:src="@drawable/logo_large" />
-
-                    <ImageButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@android:color/transparent"
-                        android:clickable="true"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/icons_calendar"
-                        android:visibility="gone" />
-                </RelativeLayout>
-            </com.google.android.material.appbar.MaterialToolbar>
-
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:layout_below="@+id/home_fragment_toolbar"
-                android:id="@+id/swipeEducation"
+                android:id="@+id/swipeMyLevels"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="48dp">
+                android:layout_marginBottom="30dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -92,7 +96,7 @@
                                 android:layout_width="130dp"
                                 android:layout_height="130dp"
                                 android:layout_gravity="center|start"
-                                android:src="@drawable/cebra" />
+                                android:src="@drawable/leon" />
 
                             <TextView
 
@@ -103,7 +107,7 @@
                                 android:fontFamily="@font/lato_black"
                                 android:gravity="center"
                                 android:padding="10dp"
-                                android:text="Regresándoles a las personas las sonrias que quieren y se merecen :)"
+                                android:text="Una sonrisa se mantiene con amor, magía y odontología."
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14dp" />
                         </LinearLayout>
@@ -118,7 +122,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="Educación Continua"
+                        android:text="Mis Niveles"
                         android:textColor="@color/colorGrey"
                         android:textSize="16sp" />
 
@@ -140,7 +144,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:fontFamily="@font/roboto_black"
-                            android:text="Nada para mostrar"
+                            android:text="No tienes niveles registrados"
                             android:textColor="@color/colorLightGrey" />
                         <ImageView
                             android:id="@+id/img_home"
@@ -151,13 +155,13 @@
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerEducation"
+                        android:id="@+id/recyclerMyLevels"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/texto_citas"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="10dp"
                         >
 
                     </androidx.recyclerview.widget.RecyclerView>

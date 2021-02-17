@@ -20,6 +20,7 @@ public class Constant {
     public static final String SUBJECTS = HOME + "/subjects-by-student/";
     public static final String COURSES = HOME + "/courses-by-subject/";
     public static final String MY_COURSES = HOME + "/my-courses";
+    public static final String MY_LEVELS = HOME + "/my-levels";
     public static final String TASKS = HOME + "/tasks-by-course/";
     public static final String TASKS_TODAY = HOME + "/task-for-today";
     public static final String FILES = HOME + "/detail-task/";

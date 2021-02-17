@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoanimales"
+    android:background="@drawable/bg_abstract"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <ScrollView
@@ -61,7 +61,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="correo@email.com"
                     android:textColor="@color/colorGrey"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
                 <ImageButton
                     android:clickable="true"
@@ -108,14 +108,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
-                    android:visibility="gone"
+
                     android:id="@+id/card_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:backgroundTint="@color/colorLightGrey"
                     app:cardCornerRadius="10dp">
                     <RelativeLayout
                         android:layout_marginBottom="10dp"
@@ -158,6 +157,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <LinearLayout
+                                android:layout_marginBottom="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -166,7 +166,7 @@
                                     android:textColor="@color/colorLightGrey"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Identificación"/>
+                                    android:text="DNI"/>
                                 <TextView
                                     android:id="@+id/account_fragment_txt_ci"
                                     android:fontFamily="@font/roboto_regular"
@@ -176,6 +176,7 @@
                                     android:text=""/>
                             </LinearLayout>
                             <LinearLayout
+                                android:layout_marginBottom="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -184,7 +185,26 @@
                                     android:textColor="@color/colorLightGrey"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Nacimiento"/>
+                                    android:text="Pasaporte"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_passport"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="F. Nacimiento"/>
                                 <TextView
                                     android:id="@+id/account_fragment_txt_date"
                                     android:fontFamily="@font/roboto_regular"
@@ -194,6 +214,7 @@
                                     android:text=""/>
                             </LinearLayout>
                             <LinearLayout
+                                android:layout_marginBottom="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -202,9 +223,9 @@
                                     android:textColor="@color/colorLightGrey"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Género"/>
+                                    android:text="Instrucción"/>
                                 <TextView
-                                    android:id="@+id/account_fragment_txt_gender"
+                                    android:id="@+id/account_fragment_txt_instruction"
                                     android:fontFamily="@font/roboto_regular"
                                     android:textColor="@color/colorBlack"
                                     android:layout_width="match_parent"
@@ -212,6 +233,102 @@
                                     android:text=""/>
                             </LinearLayout>
                             <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Estado Civil"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_marital_status"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Teléfono"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_phone"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Provincia"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_province"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cantón"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_canton"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorLightGrey"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Parroquia"/>
+                                <TextView
+                                    android:id="@+id/account_fragment_txt_parish"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/colorBlack"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginBottom="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -241,122 +358,8 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cadr_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/card_1"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="10dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/img_accou"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/icons_calendar" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_toEndOf="@+id/img_accou"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_black"
-                                android:text="Cursos"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/account_fragment_txt_count_treatment"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="0 en total"
-                                android:textColor="@color/colorLightGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cadr_2"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="90dp"
-                    app:cardCornerRadius="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/img_accou2"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/icons_calendar" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_toEndOf="@+id/img_accou2"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_black"
-                                android:text="Tareas"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/account_fragment_txt_count_appointments"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="0 en total"
-                                android:textColor="@color/colorLightGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
 

@@ -8,6 +8,7 @@ import co.desofsi.cursosutc.fragments.AccountFragment;
 import co.desofsi.cursosutc.fragments.CalendarFragment;
 import co.desofsi.cursosutc.fragments.EducationFragment;
 import co.desofsi.cursosutc.fragments.HomeFragment;
+import co.desofsi.cursosutc.fragments.LevelsFragment;
 import co.desofsi.cursosutc.fragments.MyCoursesFragment;
 import co.desofsi.cursosutc.fragments.NotificationFragment;
 import co.desofsi.cursosutc.fragments.TreatmentFragment;
@@ -88,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case ID_MESSAGE:
                         name = "MESSAGE";
-                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new TreatmentFragment(),TreatmentFragment.class.getSimpleName()).commit();
+                        fragmentManager.beginTransaction().replace(R.id.home_frame_container,new LevelsFragment(), LevelsFragment.class.getSimpleName()).commit();
 
                         break;
                     case ID_NOTIFICATION:

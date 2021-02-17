@@ -170,7 +170,9 @@ public class UserProfileActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name", name);
                 map.put("last_name", last_name);
-                map.put("url_image", bitmapToString(bitmap));
+                if(bitmap != null){
+                    map.put("url_image", bitmapToString(bitmap));
+                }
 
                 return map;
             }

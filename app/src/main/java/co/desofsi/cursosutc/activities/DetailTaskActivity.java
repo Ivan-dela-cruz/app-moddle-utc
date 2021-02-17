@@ -335,10 +335,11 @@ public class DetailTaskActivity extends AppCompatActivity implements ProgressGen
     }
 
     private void filePicker() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Seleccione su tarea para subir"), ALL_FILE_REQUEST);
+       // intent.setAction(intent);
+        //startActivityForResult(Intent.createChooser(intent, "Seleccione su tarea para subir"), ALL_FILE_REQUEST);
+        startActivityForResult(intent, ALL_FILE_REQUEST);
     }
 
     @Override

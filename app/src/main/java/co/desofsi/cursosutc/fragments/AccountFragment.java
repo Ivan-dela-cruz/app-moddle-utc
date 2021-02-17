@@ -47,9 +47,9 @@ public class AccountFragment extends Fragment {
     SharedPreferences sharedPreferences;
     private User user_login;
 
-    private ImageButton btn_edit, btn_close,btn_pass;
+    private ImageButton btn_edit, btn_close, btn_pass;
     private CircleImageView img_user;
-    private TextView txt_names, txt_email, txt_ci, txt_birth, txt_gender, txt_address, txt_treatments, txt_appointments;
+    private TextView txt_names, txt_email, txt_ci, txt_birth, txt_passport, txt_province, txt_instruction, txt_marital_status, txt_phone, txt_canton, txt_parish, txt_address, txt_treatments, txt_appointments;
 
 
     public AccountFragment() {
@@ -77,11 +77,17 @@ public class AccountFragment extends Fragment {
         txt_names = view.findViewById(R.id.account_fragment_txt_names);
         txt_email = view.findViewById(R.id.account_fragment_txt_email);
         txt_address = view.findViewById(R.id.account_fragment_txt_address);
-        txt_gender = view.findViewById(R.id.account_fragment_txt_gender);
+        txt_passport = view.findViewById(R.id.account_fragment_txt_passport);
+        txt_marital_status = view.findViewById(R.id.account_fragment_txt_marital_status);
+        txt_instruction = view.findViewById(R.id.account_fragment_txt_instruction);
+        txt_phone = view.findViewById(R.id.account_fragment_txt_phone);
+        txt_province = view.findViewById(R.id.account_fragment_txt_province);
+        txt_canton = view.findViewById(R.id.account_fragment_txt_canton);
+        txt_parish = view.findViewById(R.id.account_fragment_txt_parish);
         txt_birth = view.findViewById(R.id.account_fragment_txt_date);
         txt_ci = view.findViewById(R.id.account_fragment_txt_ci);
-        txt_treatments = view.findViewById(R.id.account_fragment_txt_count_treatment);
-        txt_appointments = view.findViewById(R.id.account_fragment_txt_count_appointments);
+        //  txt_treatments = view.findViewById(R.id.account_fragment_txt_count_treatment);
+        // txt_appointments = view.findViewById(R.id.account_fragment_txt_count_appointments);
         img_user = view.findViewById(R.id.account_fragment_img_user);
 
     }
@@ -180,8 +186,6 @@ public class AccountFragment extends Fragment {
                                 JSONObject profile = object.getJSONObject("profile");
                                 JSONObject user = object.getJSONObject("user");
 
-
-
                                 /*
                                         "birth_date": "1997-09-10",
                                         "gender": "masculino",
@@ -203,20 +207,25 @@ public class AccountFragment extends Fragment {
 
                                 User user_profile = new User();
                                 user_profile.setId(profile.getInt("id"));
-                                user_profile.setId_user(profile.getString("id_user"));
-                                user_profile.setCi(profile.getString("ci"));
+                                user_profile.setId_user(profile.getString("user_id"));
+                                user_profile.setDni(profile.getString("dni"));
+                                user_profile.setPassport(profile.getString("passport"));
                                 user_profile.setName(profile.getString("name"));
                                 user_profile.setLast_name(profile.getString("last_name"));
+                                user_profile.setInstruction(profile.getString("instruction"));
+                                user_profile.setMarital_status(profile.getString("marital_status"));
                                 user_profile.setAddress(profile.getString("address"));
                                 user_profile.setPhone(profile.getString("phone"));
                                 user_profile.setEmail(profile.getString("email"));
                                 user_profile.setUrl_image(user.getString("url_image"));
                                 user_profile.setBirth_date(profile.getString("birth_date"));
                                 user_profile.setGender(profile.getString("gender"));
-                                user_profile.setCity(profile.getString("city"));
+
                                 user_profile.setProvince(profile.getString("province"));
-                                user_profile.setTreatments(object.getInt("treatments"));
-                                user_profile.setAppointments(object.getInt("appointments"));
+                                user_profile.setCanton(profile.getString("canton"));
+                                user_profile.setParish(profile.getString("parish"));
+                                //   user_profile.setLevels(object.getInt("treatments"));
+                                //  user_profile.setCourses(object.getInt("appointments"));
 
 
                                 user_login = user_profile;
@@ -252,15 +261,26 @@ public class AccountFragment extends Fragment {
     }
 
     public void loadProfile(User user) {
+        String url_image = sharedPreferences.getString("url_image", "");
+        String passport = "- - -";
+        if (!user.getPassport().equals("")) {
+            passport = user.getPassport();
+        }
 
         txt_names.setText(user.getName() + " " + user.getLast_name());
-        txt_ci.setText(user.getCi());
+        txt_ci.setText(user.getDni());
         txt_address.setText(user.getAddress());
         txt_email.setText(user.getEmail());
-        txt_gender.setText(user.getGender());
+        txt_passport.setText(passport);
+        txt_instruction.setText(user.getInstruction());
+        txt_marital_status.setText(user.getMarital_status());
+        txt_phone.setText(user.getPhone());
+        txt_province.setText(user.getProvince());
+        txt_canton.setText(user.getCanton());
+        txt_parish.setText(user.getParish());
         txt_birth.setText(user.getBirth_date());
-        txt_appointments.setText("" + user.getAppointments() +" en total");
-        txt_treatments.setText("" + user.getTreatments()+" en total");
+//        txt_appointments.setText("" + user.getLevels() + " en total");
+  //      txt_treatments.setText("" + user.getCourses() + " en total");
 
         if (!user.getUrl_image().equals("")) {
             Picasso.get().load(Constant.URL + user.getUrl_image()).into(img_user);
