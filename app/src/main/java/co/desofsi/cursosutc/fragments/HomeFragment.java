@@ -122,8 +122,9 @@ public class HomeFragment extends Fragment {
        // my_appointments_recycler.setLayoutManager(LayoutManagaer_my_appointments);
 
         String name = sharedPreferences.getString("name", "");
+        String last_name = sharedPreferences.getString("last_name", "");
         String url_image_user = sharedPreferences.getString("url_image", "");
-        name_user.setText("Hola " + name + "   ¿Estas buscando un curso?");
+        name_user.setText(name + " "+last_name);
         Picasso.get().load(Constant.URL + url_image_user).into(image_user);
 
         getPeriods();

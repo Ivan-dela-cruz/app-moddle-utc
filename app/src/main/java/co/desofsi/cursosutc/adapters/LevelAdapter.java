@@ -1,11 +1,13 @@
 package co.desofsi.cursosutc.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +44,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LevelHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final LevelAdapter.LevelHolder holder, final int position) {
 
         final Level level = list_level.get(position);
         int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5, R.drawable.l6, R.drawable.l7, R.drawable.l8, R.drawable.l9, R.drawable.l10, R.drawable.l11, R.drawable.l12, R.drawable.l13, R.drawable.l14, R.drawable.l15};
@@ -63,10 +65,37 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
             @Override
             public void onClick(View v) {
                 Constant.LEVEL_ID = level.getLevel_id();
-                Intent intent = new Intent((LevelsActivity) context, SubjectsActivity.class);
+                Intent intent = new Intent(context, SubjectsActivity.class);
                 context.startActivity(intent);
             }
         });
+
+        if (level.getName().equals("QUINTO") | level.getName().equals("SEXTO")) {
+            holder.cardViewLevel.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    String stage = "";
+                    String level_ = "";
+
+                    switch (level.getName()) {
+                        case "QUINTO":
+                            stage = "1";
+                            level_ = "SEXTO";
+                            break;
+                        case "SEXTO":
+                            stage = "2";
+                            level_="SÉPTIMO";
+                            break;
+                    }
+
+                    holder.dialogLevel();
+                    holder.lblLevel.setText(level_+" - ETAPA "+stage);
+                    holder.lblPPP.setText("(P.P.P.) Prácticas Preprofesionates");
+                    holder.lblASC.setText("(A.S.C.) Actividad de Servicio a la Comunidad");
+                    return true;
+                }
+            });
+        }
     }
 
     @Override
@@ -77,9 +106,10 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
 
     class LevelHolder extends RecyclerView.ViewHolder {
 
-        private TextView lblNameLevel;
-        private ImageView imgLevel;
-        private CardView cardViewLevel;
+        TextView lblNameLevel, lblPPP, lblASC, lblLevel;
+        ImageView imgLevel;
+        CardView cardViewLevel;
+        ImageButton dialogCloseBtnLevel;
 
 
         public LevelHolder(@NonNull View itemView) {
@@ -88,6 +118,30 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelHolder>
             imgLevel = itemView.findViewById(R.id.imgLevel);
             lblNameLevel = itemView.findViewById(R.id.lblNameLevel);
 
+        }
+
+        public void dialogLevel() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_level_info, null);
+            builder.setView(view);
+            initDialog(view);
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+            //  dialog.setCanceledOnTouchOutside(false);
+            dialogCloseBtnLevel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        public void initDialog(View view) {
+            lblPPP = view.findViewById(R.id.lblPPP);
+            lblASC = view.findViewById(R.id.lblASC);
+            lblLevel = view.findViewById(R.id.lblLevel);
+            dialogCloseBtnLevel = view.findViewById(R.id.dialogCloseBtnLevel);
         }
     }
 }

@@ -1,36 +1,99 @@
 package co.desofsi.cursosutc.models;
 
 public class User {
-    private int id;
-    private String name,last_name,status,ci,birth_date,gender,email,id_user,address,province,city,phone,phone2,url_image;
-    private int treatments, appointments;
+    int id;
+    String name, last_name, instruction, marital_status, status, dni, passport, birth_date, gender, email, id_user, address, province, canton, parish, phone, phone2, url_image;
+    int courses, levels;
 
-    public User(int id, String name, String last_name, String status, String ci) {
+    public User(int id, String name, String last_name, String instruction, String marital_status, String status, String dni, String passport, String birth_date, String gender, String email, String id_user, String address, String province, String canton, String parish, String phone, String phone2, String url_image, int courses, int levels) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
+        this.instruction = instruction;
+        this.marital_status = marital_status;
         this.status = status;
-        this.ci = ci;
+        this.dni = dni;
+        this.passport = passport;
+        this.birth_date = birth_date;
+        this.gender = gender;
+        this.email = email;
+        this.id_user = id_user;
+        this.address = address;
+        this.province = province;
+        this.canton = canton;
+        this.parish = parish;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.url_image = url_image;
+        this.courses = courses;
+        this.levels = levels;
     }
 
     public User() {
-
     }
 
-    public int getTreatments() {
-        return treatments;
+    public int getId() {
+        return id;
     }
 
-    public void setTreatments(int treatments) {
-        this.treatments = treatments;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getAppointments() {
-        return appointments;
+    public String getName() {
+        return name;
     }
 
-    public void setAppointments(int appointments) {
-        this.appointments = appointments;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+
+    public String getMarital_status() {
+        return marital_status;
+    }
+
+    public void setMarital_status(String marital_status) {
+        this.marital_status = marital_status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
     }
 
     public String getBirth_date() {
@@ -81,12 +144,20 @@ public class User {
         this.province = province;
     }
 
-    public String getCity() {
-        return city;
+    public String getCanton() {
+        return canton;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCanton(String canton) {
+        this.canton = canton;
+    }
+
+    public String getParish() {
+        return parish;
+    }
+
+    public void setParish(String parish) {
+        this.parish = parish;
     }
 
     public String getPhone() {
@@ -113,43 +184,19 @@ public class User {
         this.url_image = url_image;
     }
 
-    public int getId() {
-        return id;
+    public int getCourses() {
+        return courses;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCourses(int courses) {
+        this.courses = courses;
     }
 
-    public String getName() {
-        return name;
+    public int getLevels() {
+        return levels;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCi() {
-        return ci;
-    }
-
-    public void setCi(String ci) {
-        this.ci = ci;
+    public void setLevels(int levels) {
+        this.levels = levels;
     }
 }

@@ -96,6 +96,7 @@
     <string name="status">Estado</string>
     <string name="files">Archivos:</string>
     <string name="info">Información de la Tarea</string>
+    <string name="info_level">Actividades del Siguiente Nivel</string>
     <string name="deliver">Entrega</string>
     <string name="selectedFile">Seleccionar Archivo</string>
     <string name="sendTask">Enviar Tarea</string>

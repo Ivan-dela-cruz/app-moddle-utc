@@ -66,12 +66,17 @@ public class SubjectsActivity extends AppCompatActivity {
         }
         init();
 
-        //back to menu estates
-        final Intent intent = new Intent(SubjectsActivity.this, LevelsActivity.class);
         btnBackSubjects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent ;
+                if (Constant.PERIOD_ID == 0) {
+                    intent = new Intent(SubjectsActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                } else {
+                    intent = new Intent(SubjectsActivity.this, LevelsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                }
                 startActivity(intent);
             }
         });
