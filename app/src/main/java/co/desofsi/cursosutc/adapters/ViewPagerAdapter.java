@@ -29,9 +29,9 @@ public class ViewPagerAdapter extends PagerAdapter {
             "Tareas"
     };
     private String descriptions[] = {
-            "Una 1 descripcion aqui.",
-            "Una 2 descripcion aqui.",
-            "Una 3 descripcion aqui."
+            "Podrás recibir documentación y material multimedia para que puedas aprender.",
+            "Te mostramos tus cátedras  dentro de tu ciclo en curso.",
+            "Podrás tener una visualización de todas tus tareas, no olvides entregarlas a tiempo :3."
     };
 
     @Override
