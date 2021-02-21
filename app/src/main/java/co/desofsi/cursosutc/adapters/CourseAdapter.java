@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -52,7 +54,8 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseHol
         int[] images = {R.drawable.l1, R.drawable.l2, R.drawable.l3, R.drawable.l4, R.drawable.l5, R.drawable.l6, R.drawable.l7, R.drawable.l8, R.drawable.l9, R.drawable.l10, R.drawable.l11, R.drawable.l12, R.drawable.l13, R.drawable.l14, R.drawable.l15};
         Random rand = new Random();
 
-        holder.imgCourse.setImageResource(images[rand.nextInt(images.length)]);
+        Picasso.get().load(Constant.URL+course.getUrl_image()).into(holder.imgCourse);
+        // holder.imgCourse.setImageResource(images[rand.nextInt(images.length)]);
         holder.lblNameCourse.setText(course.getName() +" "+course.getLast_name());
         holder.lblTitleCourse.setText(course.getTitle());
         holder.cardViewCourse.setRadius(40);
